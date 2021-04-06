@@ -1,0 +1,185 @@
+\documentclass[17pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{multicol}
+
+% bibliography
+\usepackage[authoryear]{natbib}
+
+% figures
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+%text format
+\usepackage{color}
+
+
+% document propoerties format
+\usepackage[margin=0.5in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage{multicol}
+
+\begin{document}
+\large
+%\section{Yet to be addressed issues I can think of}
+%\begin{enumerate}
+%\item All figures look cherry picked
+%\item Prove that the sensitivity to meteorological parameters I've selected (RH, $T_a$, sea water temperature, $U_{10}$) is small (I have already basically done this with perturbation theory on the T and r evolution equations)
+%\item I might not need the observations to do what I'm doing
+%\item describe more why it's interesting (or don't discuss at all) when the mean in the gamma distribution with the most enthalpy transfer for a given volume flux corresponds with the drop size that transfers the most enthalpy per unit mass. 
+%\end{enumerate}
+
+\section{Abstract}
+The microphysics of sea spray evaporation is used to identify candidate sea spray generating functions corresponding to an air-sea interface subjected to extreme wind speeds. It is also shown that spray evaporation has the potential to provide all of the air-sea enthalpy flux required to sustain a tropical cyclone. Finally, this analysis shows that the functions that have the greatest enthalpy flux for a given volume flux have a mean drop radius close to the radius which provides the most thermal energy per unit mass. The sea spray generating functions found from this analysis correspond to timescales and length scales over which the enthalpy flux from the boundary layer is approximately constant. 
+
+\section{Introduction}
+There have been many proposed sea spray generating functions (SSGF's) for various air-sea environmental conditions, though few are applicable to tropical cyclone spray conditions. \citet{Andreas2002} considered thirteen SSGF's and evaluated them against two metrics: first, the rate of spray production and second, the rate of change of free energy in the system. That study concluded that the SSGF presented in \citet{fairall1994} is the most accurate of the functions evaluated. One drawback of this SSGF is that the function is only reliable for 10-m wind speeds below 25 m/s; none of the thirteen functions considered were reliable for 10-m wind speeds beyond 32.5 m/s. \citet{Andreas2004} considered a new SSGF and discussed the simulation results in the context of sea spray supporting and redistributing the surface stress. An important, though speculative, conclusion from \citet{Andreas2004} is that the sea spray mediated energy transfer might ultimately limit the amount of energy a tropical cyclone can extract. \citet{veron2012} conducted laboratory experiments to measure the number and mass concentration of spume drops generated with 10m wind speeds in excess of 31 m/s. The observed droplet concentration generally exceeded that predicted by the SSGF proposed in \citet{fairall1994}. \par 
+\citet{Shpund2011,Shpund2012,Shpund2014} modeled the effects of sea spray on air-sea exchange and proposed an SSGF that depends on height and wind speed based on the results of a state-of-the-art 2D hybrid Lagrangian-Eulerian model. The computational domain is 400m in the vertical and 600m in the horizontal. Their SSGF uses a composite of log-normal distributions to represent the horizontally averaged size distribution. The simulation results describe the effects of the presence or absence of sea spray, as well as the influence of variations in sea surface temperature, pressure, spray production rate, background wind speed, and turbulence intensity on the spray layer. Critically, the model explicitly calculates the microphysics of the spray droplets including growth, evaporation, and collisions. They found sea spray evaporation in the hurricane spray layer can effect as much as a 15\% increase in relative humidity and a 1.5K drop in temperature, compared to a simulation without sea spray. In these simulations, the collisions of droplets were parameterized according to \citet{Pinsky2001}, which characterizes the collision efficiency for flows with a Reynolds numbers up to 100, and droplet radii up to 300$\mu$m. They found droplet collisions and coalescence on aerosols to be influential, leading to a drizzle of rain at approximately 200m above the sea surface. \citet{Zweers2015} use an SSGF that is cubic with wind speed until the 10m wind speed exceeds 50 m/s, after which the SSGF is quadratic with wind speed. The results from this study, discussed in the next section, agree with the theory in \citet{Emanuel1995} and data from two tropical cyclones.\par
+\section{Motivation}
+A tropical cyclone's intensity depends on the rate at which enthalpy is extracted from the sea surface. Sea spray generating functions, functions that describe the rate at which drops of different radii are injected into the air, are of interest for many applications, including initiating computational experiments and comparing with laboratory experiments. Since there is little high resolution data from within the spray layer, this analysis considers analytically which functions have the potential to provide the requisite enthalpy to the air. The candidate distributions are identified by considering timescales and spatial scales over which the enthalpy flux from the spray layer can be considered constant, corresponding to timescales on the order of hours and spatial scales on the order of a kilometer. A gamma distribution is assumed to represent the sea spray generating function since a gamma distribution is the analytical distribution of drops created through filament breakup, and filament breakup off the backs of waves appears to be the process by which sea spray is generated in extreme winds (citation needed). A log-normal distribution, traditionally used to represent spray generation, is shown for comparison. 
+
+\section{Methods}
+If the rate of boundary layer enthalpy flux is constant, then the total enthalpy flux $\left(\frac{\partial K}{\partial t} \right)$ can be written in terms of the total enthalpy transfer from individual drops $\left(Y(r)\right)$ and the SSGF $\phi$ 
+\begin{align}
+\frac{\partial K}{\partial t	} = \int Y(r) \phi dr\label{Eq:TotalEnthalpy}
+\end{align}
+where $\frac{\partial K}{\partial t	}$ is in Watts/m$^2$, $Y(r)$ is the enthalpy transfer in Joules from a drop of radius $r$ between the time it is ejected until it re-enters the ocean or comes into thermal equilibrium with the air, and $\phi $ is the number of drops that are injected into the spray layer per second per square meter per drop radius.
+\subsection{Total Enthalpy Flux $\frac{\partial K}{\partial t	}$}
+The enthalpy flux from the sea to the air in the eyewall of a hurricane is on the order of 100 W/m$^2$. The total enthalpy flux $\frac{\partial K}{\partial t}$ has been reported to be relatively constant for length scales on the order of a kilometer according to observations of surface enthalpy flux described in \citet{Bell2012}. The same control volume approach was used, except on smaller domains (0.25 km in the radial direction and 1 kilometer in the vertical direction), along the radial length of the observations, as seen in Figure \ref{Fig:Isabel}.\par 
+%% TODO: Insert size of control volume here
+
+\subsection{Drop Enthalpy Flux $Y(r)$}
+Once a drop is ejected it will begin to transfer enthalpy to the air; the evolution of the drop's temperature $(T)$ and radius $(r)$ are coupled as described in \citet{Pruppacher1978}. Using the notation from \citet{Andreas2005}, the evolution equations are
+\begin{align}
+\frac{\partial T}{\partial t} &= \frac{3\Big(k_a'(T_a-T)+L_vD_w'(\rho_v-\rho_{v,r})\Big)}{\rho c_{p}r^2} \\
+\frac{\partial r}{\partial t} &= \frac{[(RH-1)-y]r^{-1}}{\frac{\rho_sRT_a}{D_w'M_we_{\text{sat}}(T_a)}+\frac{\rho L_v}{k_a'T_a}\left(\frac{L_vM_w}{RT_a}-1\right)}
+\end{align}
+where $k_a'$ is the thermal conductivity, $T_a$ is the ambient air temperature, $L_v$ is the latent heat of vaporization, $D_w'$ is the vapor diffusivity, $\rho_v$ is the ambient vapor density, $\rho_{v,r}$ is the vapor density at the drop surface, $\rho$ is the water density, $c_p$ is the specific heat of water, $RH$ is the relative humidity, $y$ is the drop's curvature parameter, $R$ is the universal gas constant, $M_w$ is the molar mass of water, and $e_{sat}$ is the saturated vapor partial pressure. As stated in \citet{Andreas1992}, the temperature evolution describes the transfer of sensible heat ($Q_s$) and the radius evolution describes the transfer of latent heat ($Q_L$) from the drop to the air 
+\begin{align}
+Q_s &= c_p \rho \frac{4}{3}\pi r^3(T - T_a)\\
+Q_L &= L_v  \rho \frac{4}{3}\pi r_0^3\left(1-\left(\frac{r}{r_0}\right)^3\right)\\
+Y(r) &= \int_0^{t_f} Q_s - Q_L \text{dt}
+\end{align}
+ where $r_0$ is the drop's initial radius. If the drop completely evaporates, it is considered to have no net thermodynamic effect on the air since it is assumed that the drop can only absorb a quantity of latent heat from the air that is less than or equal to the amount of sensible heat the drop initially released \citep{Pruppacher1978}.
+Once ejected, the drop will cool rapidly, on the order of 1 second, to its wet bulb temperature while losing less than 1\% of its mass. Only after an extended period of time aloft, typically 100's of seconds, will the drop be able to extract an appreciable amount of latent heat from the air as it evaporates. Since these two processes, the release of sensible heat and absorption of latent heat, are essentially temporally decoupled, the air-sea enthalpy transfer in the tropical cyclone spray layer is enhanced due to ejected drops returning to the sea after they have released the initial burst of sensible heat, but before they have absorbed an appreciable amount of latent heat. The importance of enhanced enthalpy flux from re-entrant spray to tropical cyclones is detailed in \citet{Andreas2001}.\par
+A drop's total time aloft will influence $Y(r)$, and in this analysis the flight time ($t_f$) from \citet{Andreas1992} is used
+\begin{equation}
+t_f = \frac{A_{1/3}}{u_f(r_0)}\label{tofU10}
+\end{equation}
+where the characteristic wave height ($A_{1/3}$) is 0.015$U_{10}^2$ and $u_f(r_0)$ is the Stokes fall speed of the drop at its initial radius $r_0$. 
+\subsection{Sea Spray Generating Function $\phi$}
+It can be shown that the analytical distribution of drops created due to filament breakup is a gamma distribution [CITATION NEEDED]. 
+%% TODO: find a source that shows that water drop breakup off the backs of waves is filament breakup
+If $\phi$ is considered to be a gamma distribution with a mean $\mu_\Gamma$ and standard deviation $\sigma_\Gamma^2$ 
+\begin{align}
+\phi &= \frac{1}{b^a\Gamma(a)}x^{a-1}e^{\frac{-x}{b}}\\
+\Gamma(a) &= \int_0^\infty x^{a-1}e^{-x}dx\\
+\nonumber \mu_\Gamma = ab ,&\qquad \sigma_\Gamma = ab^2
+\end{align}
+where $a$ and $b$ are the shape and scale parameters, respectively. Alternatively, if $\phi$ is considered to be a log-normal distribution with a mean $\mu_{\text{ln}}$ and standard deviation $\sigma_{\text{ln}}$  
+\begin{align}
+\phi &= \frac{1}{x\sigma \sqrt{2\pi}}e^{- \frac{ (\text{ln}(x) -\mu_{\text{ln}})^2}{2\sigma_{\text{ln}}^2}}\\
+\Gamma(a) &= \int_0^\infty x^{a-1}e^{-x}dx\\
+\nonumber \mu_{\text{ln}} = e^{\mu_{\text{ln}}+\sigma_{\text{ln}}^2/2}\\
+ \sigma_{\text{ln}} =  e^{\sigma_{\text{ln}}^2/2}
+\end{align}
+\subsection{Meteorological Parameter Selection}
+Several environmental parameters that are typical of spray layer conditions are held constant. These parameters are: a 10m wind speed of 50 m/s, an air temperature of 27$^{\circ}$C, a sea temperature of 29$^{\circ}$C, and a relative humidity of 90\%. \par
+In order for the comparison between spray generating functions to be meaningful, the total volume flux of the spray needs to be held constant. By integrating other proposed SSGF's over the initial drop radii, a volume flux of about 5(10$^{-6}$) m$^3$/m$^2$/s is reasonable for 10m wind speeds of 50 m/s; see Figure \ref{Fig:otherVolFluxes}. Next, the maximum enthalpy flux provided across any of the examined SSGF's is plotted against different wind speeds (which influence the enthalpy flux through $t_f$), holding the volume flux constant to provide an idea of how much more enthalpy can be transferred for a given increment in the total volume flux.
+
+
+\section{Results}
+The enthalpy flux for a range of $\phi$'s is calculated with Equation \ref{Eq:TotalEnthalpy}. Since the enthalpy and momentum exchange potential of a spray drop will depend on a drop's initial radius, we can search for an optimal drop size. The smallest drops will evaporate completely, while the largest drops have the greatest sensible heat transfer potential but are unlikely to survive high wind speeds without breaking up since their Weber numbers are likely to be above the critical Weber number of 10 [CITATION NEEDED]. To account for this we set the enthalpy transfer potential of drops with supercritical Weber numbers to zero. \par
+Figures \ref{Fig:E_contour40} and \ref{Fig:E_contour50} show that the spray alone is capable of supporting the enthalpy flux. For comparison Figure [INSERT NUMBER] shows the enthalpy flux if a log-normal distribution was used. 
+%% todo: add example figure of Y(r) to show which drops go to zero
+Using the same volume flux as Andreas, but changing the SSGF or the ratios between the numbers of drops of different radii, a much larger enthalpy flux can be attained. \par 
+Similarly, it is the mass (which is proportional to the drop's size) of the drop which dictates the amount of momentum it can extract from the air since the kinetic energy (KE) and gravitational potential energy (GPE) imparted by the wind to the drop are both proportional to the drop's mass. Since the drops are not aloft long enough to appreciably change in radius, the initial radius is a good approximation for the amount of momentum transferred.
+\begin{align}
+\text{KE} &= \frac{1}{2}\left(\frac{4}{3}\pi r^3 \rho\right)v^2\\
+\text{GPE} &= \left(\frac{4}{3}\pi r_0^3 \right)\rho g h
+\end{align}
+where $v$ is the drop's speed and $h$ is the maximum height to which the drop is raised.
+%% TODO: add the variable definitions
+If $v$ and $h$ are comparable among drops of different radii, then the primary distinction is a drop's mass. Figure \ref{Fig:optimalDrop} shows the ratio of energy transferred to mechanical energy imparted. The optimal drop size appears to be a function of time spent aloft, and this optimal drop size appears to track well with the mean of the SSGF's that provide the most enthalpy. Considering two 10m wind speeds here, the mean drop radius that transfers the most energy per unit mass aligns well with the mean of the sea spray generating function that transfers the most enthalpy when the volume flux is held constant. Interestingly, the variance in the gamma distributions has a much larger range for the same enthalpy transfer compared to the mean.
+
+
+\subsection*{Scaling argument for $r_0$}
+To develop a scaling for the drop radius that would transfer the most energy per unit mass, note that $R$ has units of Joules per kilogram.
+\begin{align}
+\max \frac{Q_s-Q_L}{\frac{4}{3}\pi r_0^3 \rho}\\
+\end{align}
+
+\begin{align*}
+\frac{c_{ps} (T_s-T(t))\left( \frac{4}{3}\pi r_0^3 \rho\right)-L_v \left(1-\left(\frac{r(t)}{r_0}\right)^3\right)\left( \frac{4}{3}\pi r_0^3 \rho\right)}{\frac{4}{3}\pi r_0^3 \rho}\\
+c_{ps} (T_s-T(t))-L_v \left(1-\left(\frac{r(t)}{r_0}\right)^3\right)\\
+\end{align*}
+
+If $T(t)$ is approximated as a sum of exponentials,
+\begin{align}
+T(t) = c_1e^{-t/\tau_1}+c_2e^{-t/\tau_2}
+\end{align}
+for with the constants $c_i$ and $\tau_T$ are solved, we find that the temperature evolution depends primarily on the two parameters $RH$ and $\Delta T$. 
+\begin{align}
+ c_1 =   -0.0616 RH  + -0.0008 r_0  + 0.2753 \Delta T +   8.8763\\
+ \tau_1 =   -0.1316 RH  +    0.0138 r_0  +    1.4294 \Delta T +    8.8224\\
+ c_2 =    0.0576 RH  +    0.0006 r_0  +   -0.3167 \Delta T +   20.5574\\
+ \tau_2 =     0.0056 RH  +    0.0002 r_0  +    0.0370 \Delta T +  -0.5818\\
+\end{align}
+These approximation formulas, based on a matrix of deterministic simulations with the full microphysical model
+
+
+\newpage
+% ----------- FIGURE ---------------
+\begin{figure}[!h]
+\centering
+\includegraphics[width = 0.6\textwidth]{imgs/Isabel_Aug4_250m_CV.png}\\
+\caption{Output from SAMURAI of Hurricane Isabel on August 4, 2003 confirms the order of magnitude of the boundary layer enthalpy flux and 10m wind speeds in a major hurricane. \label{Fig:Isabel}}
+%% TODO: Check the spelling of SAMAURI
+%% TODO: Get a picture of just August 4
+\end{figure}
+% ----------------------------------
+
+\begin{figure}[h!]
+\begin{subfigure}[t]{\textwidth}
+\includegraphics[width=\textwidth]{imgs/differentS0s_VolFlxs.png}
+\subcaption{Previously proposed volume fluxes calculated by integrating the SSGF \label{Fig:otherVolFluxes}}
+\end{subfigure}
+\begin{subfigure}[t]{\textwidth}
+\includegraphics[width=\textwidth]{imgs/differentS0s_VolFlxs_maxFlux.png}
+\subcaption{While a larger volume flux will increase the enthalpy flux, the 10m windspeed has a quadratic influence on the enthalpy flux.\label{Fig:VF}}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width = \textwidth]{imgs/E_contour_U10_40_VF_10e-6.png}
+\subcaption{The energy form $U_{10}$ = 40\label{Fig:E_contour40}}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\includegraphics[width = \textwidth]{imgs/E_contour_U10_50_VF_10e-6.png}
+\subcaption{The energy form $U_{10}$ = 50\label{Fig:E_contour50}}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width = \textwidth]{imgs/QsQL_drops_Andres1992.png}
+\caption{optimal drop initial radius (the max for each wind speed is labeled, althogh admittedly is difficult to read\label{Fig:optimalDrop}}
+\end{figure}
+
+
+
+\newpage
+
+blank page
+
+\newpage
+
+\bibliographystyle{apa}
+\bibliography{../References/bibtex/all_of_everything}
+
+\end{document}

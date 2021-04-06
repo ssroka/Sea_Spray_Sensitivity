@@ -1,0 +1,103 @@
+ \documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{multicol}
+
+% bibliography
+\usepackage[authoryear]{natbib}
+
+% figures
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+%text format
+\usepackage{color}
+
+
+% document propoerties format
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage{multicol}
+
+\begin{document}
+
+ \renewcommand{\theenumi}{\Roman{enumi}}
+ \renewcommand{\theenumii}{\arabic{enumii}}
+ \renewcommand{\theenumiii}{\alpha{enumiii}}
+ 
+ 
+\begin{enumerate}
+\item
+Assume that all of the enthalpy is mediated by the sea spray.
+\begin{enumerate}
+\item 
+If it can be assumed that the flow regime is that of large $R_u$ according to \citet{Emanuel2003}, such that the hurricane spray layer becomes a saltwater emulsion, then it should be possible to find a height above the quiescent sea surface that is approximately equal parts air and sea water by volume. This suggests that all of the enthalpy transfer must be mediated by this layer of evaporating spray. 
+\end{enumerate}
+\item 
+What is the sea spray generating function?
+\begin{enumerate}
+\item
+There have been many proposed SSGF's from observations and theory
+\end{enumerate}
+\item 
+Improved approximation formulations for sea spray drop and temperature evolution
+\begin{enumerate}
+\item The equations are:
+\begin{align*}
+&\max \frac{Q_s-Q_L}{\frac{4}{3}\pi r_0^3 \rho}\\
+&\frac{c_{ps} (T_s-T(t))\left( \frac{4}{3}\pi r_0^3 \rho\right)-L_v \left(1-\left(\frac{r(t)}{r_0}\right)^3\right)\left( \frac{4}{3}\pi r_0^3 \rho\right)}{\frac{4}{3}\pi r_0^3 \rho}\\
+&c_{ps} (T_s-T(t))-L_v \left(1-\left(\frac{r(t)}{r_0}\right)^3\right)
+\end{align*}
+\item we can write $T(t)$ and $r(t)$ in terms of the environmental parameters $RH$, $T_s-T_a$, and $r_0$ assuming that the salinity of they spray is 34 psu.
+\item assuming the form of both $T(t)$ and $r(t)$ are decaying exponentials, \\
+$T(t) = c_1e^{-t/\tau_1}+c_2e^{-t/\tau_2}$\\
+similar to the approximations made in \citet{Andreas2005}, the constants with good agreement are
+\begin{align}
+ c_1 &=   -0.0616 RH  + -0.0008 r_0  + 0.2753 \Delta T +   8.8763\\
+ \tau_1 &=   -0.1316 RH  +    0.0138 r_0  +    1.4294 \Delta T +    8.8224\\
+ c_2 &=    0.0576 RH  +    0.0006 r_0  +   -0.3167 \Delta T +   20.5574\\
+ \tau_2 &=     0.0056 RH  +    0.0002 r_0  +    0.0370 \Delta T +  -0.5818
+\end{align}
+Since over this period of time the drop's radius changes by only about 1\% 
+
+\end{enumerate}
+
+\[ T(t) = c_1e^{-t/\tau_1}+c_2e^{-t/\tau_2} \]
+\[ c_1 = \alpha_1 RH + \alpha_2 r_0 + \alpha_3 \]
+\[ c_3 = \alpha_4 RH + \alpha_5 r_0 + \alpha_6 \]
+\[\tau_1 = (\alpha_7 RH+\alpha_8 \Delta T+\alpha_9)/r_0^2+\alpha_{10} \]
+\[\tau_2 = (\alpha_{11} RH+\alpha_{12} \Delta T+\alpha_{13})/r_0^2+\alpha_{14} \]
+
+\[ r(t) = c_3 t + c_4 \]
+\[ c_3 = \beta_1/r_0+\beta_2 \]
+\[ c_4 = \beta_3 r_0+\beta_4 \]
+ 
+ \end{enumerate}
+ 
+ $\Delta T= T_{air} - T_{sea}$ \qquad
+ $r_0=r(t=0)$ \qquad
+ $RH$=Relative Humidity 
+ 
+ 
+ 
+ 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.75\textwidth]{imgs/many_T_t_DT3.png}
+\caption{Temperature of drops of different sizes}
+\end{figure}
+ 
+ 
+ 
+ 
+ 
+\newpage
+
+\bibliographystyle{apa}
+\bibliography{../References/bibtex/all_of_everything}
+ 
+ \end{document}

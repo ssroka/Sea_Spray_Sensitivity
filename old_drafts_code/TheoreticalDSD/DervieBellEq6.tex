@@ -1,0 +1,177 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{multicol}
+
+% bibliography
+\usepackage[authoryear]{natbib}
+
+% figures
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+%text format
+\usepackage{color}
+\usepackage{setspace}
+\usepackage{bigints}
+\doublespacing
+
+% document propoerties format
+\usepackage[margin=0.5in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage{multicol}
+
+\newcommand{\half}{\frac{1}{2}}
+
+\begin{document}
+\raggedright
+\begin{align}
+\frac{\partial (\rho \tilde{E})}{\partial t}&+\frac{\partial (\rho r \tilde{u} \tilde{E})}{r\partial r}+\frac{\partial (\rho \tilde{w} \tilde{E})}{\partial z} = 0\\
+\tilde{E} &= c_p\tilde{T}+L_v\tilde{q}+\half(\tilde{u}^2+\tilde{v}^2+\tilde{w}^2)+gz\\
+E &= c_pT+L_vq+\half(u^2+v^2+w^2)+gz\\
+\tilde{\bullet} &= \bullet + \bullet'
+\end{align}
+
+\begin{align}
+&\begin{split}
+&\frac{\partial (\rho (c_p\tilde{T}+L_v\tilde{q}+\half(\tilde{u}^2+\tilde{v}^2+\tilde{w}^2)+gz)))}{\partial t}+...\\
+&\frac{\partial (\rho r \tilde{u}(c_p\tilde{T}+L_v\tilde{q}+\half(\tilde{u}^2+\tilde{v}^2+\tilde{w}^2)+gz))}{r\partial r}+\frac{\partial (\rho \tilde{w} (c_p\tilde{T}+L_v\tilde{q}+\half(\tilde{u}^2+\tilde{v}^2+\tilde{w}^2)+gz))}{\partial z} = 0
+\end{split}\\
+&\begin{split}
+&\frac{\partial}{\partial t} \left(\rho c_p(T+T')+\rho L_v(q+q')+\rho \half((u+u')^2+(v+v')^2+(w+w')^2)+\rho gz\right)+...\\
+&\frac{\partial }{r\partial r}\left(\rho r (u+u')\left[c_p(T+T')+L_v(q+q')+\half((u+u')^2+(v+v')^2+(w+w')^2)+gz\right]\right)+...\\
+&\frac{\partial}{\partial z}\left(\rho (w+w') \left[c_p(T+T')+L_v(q+q')+\half((u+u')^2+(v+v')^2+(w+w')^2)+gz\right]\right) = 0
+\end{split}
+\end{align}
+
+\begin{align}
+&\rho r (u+u')(c_p(T+T')+L_v(q+q')+\half((u+u')^2+(v+v')^2+(w+w')^2)+gz)\\
+\begin{split}
+&\rho r u(c_p(T+T')+L_v(q+q')+\half((u+u')^2+(v+v')^2+(w+w')^2)+gz)+...\\
+&\rho r u'(c_p(T+T')+L_v(q+q')+\half((u+u')^2+(v+v')^2+(w+w')^2)+gz)\\
+\end{split}
+\end{align}
+
+\begin{align}
+\half((u+u')^2+(v+v')^2+(w+w')^2)\\
+\half((u^2+2uu'+u'^2)+(v^2+2vv'+v'^2)+(w^2+2ww'+w'^2))\\
+\half((u^2+v^2+w^2)+2(uu'+vv'+ww')+ (u'^2+v'^2+w'^2))\\
+e/\rho+2(uu'+vv'+ww')+e'/\rho
+\end{align}
+
+\begin{align}
+\begin{split}
+&\rho r u(c_p(T+T')+L_v(q+q')+\half(2e/\rho+2(uu'+vv'+ww')+2e'/\rho)+gz)+...\\
+&\rho r u'(c_p(T+T')+L_v(q+q')+\half(2e/\rho+2(uu'+vv'+ww')+2e'/\rho)+gz)
+\end{split}\\
+\begin{split}
+&\rho r uc_pT+\rho r uc_pT'+\rho r uL_vq+\rho r uL_vq'+ r u e+\rho r u(uu'+vv'+ww')+r u e'+\rho r ugz+...\\
+&\rho r u'c_pT+\rho r u'c_pT'+\rho r u'L_vq+\rho r u'L_vq'+r u'e+\rho r u'(uu'+vv'+ww')+ r u' e'+\rho r u' gz
+\end{split}\\
+\begin{split}
+&\rho r u(c_pT+L_vq+e/\rho+gz)+\rho r uc_pT'+\rho r uL_vq'+\rho r u(uu'+vv'+ww')+r u e'+...\\
+&\rho r u'(c_pT+L_vq+e/\rho+gz)+\rho r u'c_pT'+\rho r u'L_vq'+\rho r u'(uu'+vv'+ww')+r u'e'
+\end{split}\\
+\begin{split}
+&\rho r u(E)+\rho r uc_pT'+\rho r uL_vq'+\rho r u(uu'+vv'+ww')+r u e'+...\\
+&\rho r u'(E)+\rho r u'c_pT'+\rho r u'L_vq'+\rho r u'(uu'+vv'+ww')+ r u' e'
+\end{split}\\
+\end{align}
+
+\begin{align}
+\tau_{r \theta} = -\rho u'v'\\
+\tau_{z \theta}=  -\rho w'v'\\
+F_{rT} = \rho c_p u'T'\\
+F_{zT} = \rho c_p w'T'\\
+F_{rq} = \rho L_v u'q'\\
+F_{zq} = \rho L_v w'q'\\
+\end{align}
+
+\begin{align}
+\begin{split}
+&\rho r u(E)+\rho r uc_pT'+\rho r uL_vq'+\rho r u(uu'+vv'+ww')+ r u e'+...\\
+&\rho r u'(E)+rF_{rT}+ rF_{rq}+ r(-u\tau_{rr} -v\tau_{r \theta}-w\tau_{r z})+ r u'e'
+\end{split}\\
+\end{align}
+
+\begin{align}
+&\begin{split}
+&\frac{\partial}{\partial t} \left(\rho c_p(T+T')+\rho L_v(q+q')+e+\rho(uu'+vv'+ww')+e'+\rho gz\right)+...\\
+&\frac{\partial }{r\partial r}\Big(\rho r u(E)+\rho r uc_pT'+\rho r uL_vq'+\rho r u(uu'+vv'+ww')+ r u e'+...\\
+&\rho r u'(E)+rF_{rT}+ rF_{rq}+ r(-u\tau_{rr} -v\tau_{r \theta}-w\tau_{r z})+r u'e'\Big)+...\\
+&\frac{\partial}{\partial z}\Big(\rho  w(E)+\rho  wc_pT'+\rho  wL_vq'+\rho  w(uu'+vv'+ww')+  w e'+...\\
+&\rho  w'(E)+F_{zT}+ F_{zq}+ (-u\tau_{zr} -v\tau_{z \theta}-w\tau_{z z})+ w'e'\Big) = 0
+\end{split}
+\end{align}
+
+
+\begin{align}
+&\begin{split}
+&\bigintsss_{z_1}^{z_2} \bigintsss_{r_1}^{r_2}\Bigg[\frac{\partial}{\partial t} \left(\rho c_p(T+T')+\rho L_v(q+q')+e+\rho(uu'+vv'+ww')+e'+\rho gz\right)+...\\
+&\frac{\partial }{r\partial r}\Big(\rho r u(E)+\rho r uc_pT'+\rho r uL_vq'+\rho r u(uu'+vv'+ww')+ r u e'+...\\
+&\rho r u'(E)+rF_{rT}+ rF_{rq}+ r(-u\tau_{rr} -v\tau_{r \theta}-w\tau_{r z})+r u'e'\Big)+...\\
+&\frac{\partial}{\partial z}\Big(\rho  w(E)+\rho  wc_pT'+\rho  wL_vq'+\rho  w(uu'+vv'+ww')+  w e'+...\\
+&\rho  w'(E)+F_{zT}+ F_{zq}+ (-u\tau_{zr} -v\tau_{z \theta}-w\tau_{z z})+  w'e'\Bigg] r dr dz= 0
+\end{split}
+\end{align}
+
+\begin{align}
+&\begin{split}
+&\bigintsss_{z_1}^{z_2} \bigintsss_{r_1}^{r_2}\frac{\partial}{\partial t} \left(\rho c_p(T+T')+\rho L_v(q+q')+e+\rho(uu'+vv'+ww')+e'+\rho gz\right)r dr dz +...\\
+&\bigintsss_{z_1}^{z_2} \bigintsss_{r_1}^{r_2}\frac{\partial }{r\partial r}\Big(\rho r u(E)+\rho r uc_pT'+\rho r uL_vq'+\rho r u(uu'+vv'+ww')+ r u e'+...\\
+&\rho r u'(E)+rF_{rT}+ rF_{rq}+ r(-u\tau_{rr} -v\tau_{r \theta}-w\tau_{r z})+r u'e'\Big)r dr dz+...\\
+&\bigintsss_{z_1}^{z_2} \bigintsss_{r_1}^{r_2}\frac{\partial}{\partial z}\Big(\rho  w(E)+\rho  wc_pT'+\rho  wL_vq'+\rho w(uu'+vv'+ww')+ w e'+...\\
+&\rho  w'(E)+F_{zT}+ F_{zq}+ (-u\tau_{zr} -v\tau_{z \theta}-w\tau_{z z})+ w'e'\Big)r dr dz= 0
+\end{split}
+\end{align}
+Remove zero mean terms
+\begin{align}
+&\begin{split}
+&\bigintsss_{z_1}^{z_2} \bigintsss_{r_1}^{r_2}\frac{\partial}{\partial t} \left(\rho c_p(T)+\rho L_v(q)+e+e'+\rho gz\right)r dr dz +...\\
+&\bigintsss_{z_1}^{z_2} \bigintsss_{r_1}^{r_2}\frac{\partial }{r\partial r}\Big(\rho r u(E)+ r u e'+rF_{rT}+ rF_{rq}+ r(-u\tau_{rr} -v\tau_{r \theta}-w\tau_{r z})+ r u'e'\Big)r dr dz+...\\
+&\bigintsss_{z_1}^{z_2} \bigintsss_{r_1}^{r_2}\frac{\partial}{\partial z}\Big(\rho  w(E)+  w e'+F_{zT}+ F_{zq}+ (-u\tau_{zr} -v\tau_{z \theta}-w\tau_{z z})+  w'e'\Big)r dr dz= 0
+\end{split}\\
+&\begin{split}
+&\bigintsss_{z_1}^{z_2} \bigintsss_{r_1}^{r_2}\frac{\partial}{\partial t} \left(\rho E+e'\right)r dr dz +...\\
+&\bigintsss_{z_1}^{z_2} \bigintsss_{r_1}^{r_2}\frac{\partial }{r\partial r}\Big(\rho r u(E)+ r u e'+rF_{rk}+  r(-u\tau_{rr} -v\tau_{r \theta}-w\tau_{r z})+r u'e'\Big)r dr dz+...\\
+&\bigintsss_{z_1}^{z_2} \bigintsss_{r_1}^{r_2}\frac{\partial}{\partial z}\Big(\rho  w(E)+ w e'+F_{zk}+ (-u\tau_{zr} -v\tau_{z \theta}-w\tau_{z z})+ w'e'\Big)r dr dz= 0
+\end{split}\\
+\end{align}
+
+\begin{align}
+&\begin{split}
+&\bigintsss_{z_1}^{z_2} \bigintsss_{r_1}^{r_2}\frac{\partial}{\partial t} \left(\rho E+e'\right)r dr dz +...\\
+&\bigintsss_{z_1}^{z_2} r_2\Big[\rho uE+ u e'+F_{rk}+  (-u\tau_{rr} -v\tau_{r \theta}-w\tau_{r z})+ u'e'\Big]_{r_2} dz+...\\
+&-\bigintsss_{z_1}^{z_2}r_1\Big[\rho  uE+  u e'+F_{rk}+  (-u\tau_{rr} -v\tau_{r \theta}-w\tau_{r z})+u'e'\Big]_{r_1} dz+...\\
+&\bigintsss_{r_1}^{r_2}\Big[\rho wE+ w e'+F_{zk}+ (-u\tau_{zr} -v\tau_{z \theta}-w\tau_{z z})+ w'e'\Big]_{z_2}rdr  +...\\
+&-\bigintsss_{r_1}^{r_2}\Big[\rho  wE+ w e'+F_{zk}+ (-u\tau_{zr} -v\tau_{z \theta}-w\tau_{z z})+ w'e'\Big]_{z_1}rdr = 0
+\end{split}\\
+\end{align}
+Ignore conversion of mean kinetic energy to turbulent kinetic energy
+\begin{align}
+&\begin{split}
+&\bigintsss_{z_1}^{z_2} \bigintsss_{r_1}^{r_2}\frac{\partial}{\partial t} \left(\rho E+e'\right)r dr dz +...\\
+&\bigintsss_{z_1}^{z_2} r_2\Big[\rho uE+ u e'+F_{rk}-v\tau_{r \theta}-w\tau_{r z}+ u'e'\Big]_{r_2} dz+...\\
+&-\bigintsss_{z_1}^{z_2}r_1\Big[\rho  uE+  u e'+F_{rk}-v\tau_{r \theta}-w\tau_{r z}+u'e'\Big]_{r_1} dz+...\\
+&\bigintsss_{r_1}^{r_2}\Big[\rho wE+ w e'+F_{zk}-u\tau_{zr} -v\tau_{z \theta}+ w'e'\Big]_{z_2}rdr  +...\\
+&-\bigintsss_{r_1}^{r_2}\Big[\rho  wE+ w e'+F_{zk}-u\tau_{zr} -v\tau_{z \theta}+ w'e'\Big]_{z_1}rdr = 0
+\end{split}
+\end{align}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

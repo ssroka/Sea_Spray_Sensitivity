@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: ch1_outline_v13.aux
+The style file: apa.bst
+Database file #1: ../References/bibtex/all_of_everything.bib
+You've used 6 entries,
+            1940 wiz_defined-function locations,
+            523 strings with 4810 characters,
+and the built_in function-call counts, 2507 in all, are:
+= -- 247
+> -- 96
+< -- 4
++ -- 32
+- -- 32
+* -- 235
+:= -- 434
+add.period$ -- 18
+call.type$ -- 6
+change.case$ -- 45
+chr.to.int$ -- 6
+cite$ -- 6
+duplicate$ -- 84
+empty$ -- 178
+format.name$ -- 42
+if$ -- 478
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 7
+newline$ -- 33
+num.names$ -- 18
+pop$ -- 34
+preamble$ -- 1
+purify$ -- 46
+quote$ -- 0
+skip$ -- 64
+stack$ -- 0
+substring$ -- 212
+swap$ -- 12
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 34
+warning$ -- 0
+while$ -- 22
+width$ -- 0
+write$ -- 80

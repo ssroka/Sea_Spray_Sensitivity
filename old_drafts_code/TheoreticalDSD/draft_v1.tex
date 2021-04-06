@@ -1,0 +1,216 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{multicol}
+
+% bibliography
+\usepackage[authoryear]{natbib}
+
+% figures
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+%text format
+\usepackage{color}
+\usepackage{setspace}
+\doublespacing
+
+
+% document propoerties format
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage{multicol}
+
+\begin{document}
+% TODO 
+
+\iffalse
+from gareth
+1. add scaling arguments about kinetic energy loss heating the air
+2. added scaling arguments about frictional dissipation heating the air
+
+finish the MC for the drop collisions
+finish control volume analysis 
+finish gamma distribution test
+see if Villamaux will check 
+
+\fi
+
+
+\section{ABSTRACT}
+The microphysics of sea spray are important for determining the enthalpy and momentum fluxes through the hurricane spray layer. Since drops of different radii provide different amounts of enthalpy and consume different amounts of momentum, the rate of drop creation can significantly influence energy exchange in this turbulent region. We argue that observations of the fluxes in the hurricane spray layer and drop microphysics can identify candidate sea spray generation functions. The form of the sea spray generation functions compares well with previously proposed functions and experimental results. This work supports the conclusion that the spray fluxes are the primary source of enthalpy flux.
+
+\section{Introduction}
+Hurricane intensity depends critically on the enthalpy flux from the sea surface. Most of the heat transfer occurs inside the radius of maximum wind where the high wind speeds transform the air-sea interface into an air-saltwater emulsion. The heat transfer in this region is mediated by the sea spray. A critical question is "what is the drop size distribution?" In this paper we use the microphysics governing spray evaporation to determine characteristics of the drop size distribution.\par
+\citet{Bell2012} calculated the enthalpy transfer coefficient and the drag coefficient from flight-level observations and dropsondes deployed in two major hurricanes as part of the 2003 Coupled Boundary Layers Air–Sea Transfer (CBLAST) field program \citep{Black2007}, which were the first measurements of the enthalpy exchange coefficient collected from major hurricanes. Using energy conservation and control volume analysis, \citet{Bell2012} calculated the enthalpy flux through the spray layer. We use these measurements as examples of the total hurricane flux.\par
+The distribution of drop sizes has a profound impact on the net momentum and enthalpy flux. The majority of the smallest drops will evaporate completely and effect a very small enthalpy flux \citep{Andreas2001}. The largest drops are not aloft long enough to achieve their maximum enthalpy transfer, but are a significant momentum sink since they require the most work to accelerate. Many sea spray generating functions (SSGF's), which describe the rate of drop production as a function of drop radius, have been proposed \citep{Fairall1996}, but the majority are only valid for low (sub-hurricane) wind speeds. Large simulations have demonstrated the importance of turbulence to the spray dynamics \citep{Shpund2011,Shpund2012,Shpund2014}. Recent experiments by \citet{Ortiz-Suslow2016} provided a starting point for the candidate SSGF's investigated in this work.\par
+ \citet{Andreas2001} describe the importance of sea spray microphysics to the thermodynamics in the hurricane spray layer; specifically the enhanced enthalpy flux due to re-entrant spray is shown to be required to sustain the large enthalpy fluxes that we know support large hurricanes. The crucial reason for this enhanced enthalpy flux is that an evaporating drop undergoes evaporative cooling upon ejection, losing less than 1\% of its mass on a very short time-scale (on the order of 1 second), and absorbs latent heat from the air to evaporate the majority of its mass on much longer time scales (on the order of a few minutes). This regime separation provides an opportunity for the spray drop to return to the sea after it has cooled to its wet bulb temperature, which is lower than the ambient air temperature, but before completely evaporating cooling and salinating the sea surface. \par 
+% Describe the importance of the exchange coefficients \citep{Emanuel2003}.
+
+\section{Methods}
+It is proposed that  candidate SSGF's ($\phi(r)$) can be identified from the energy transfer of individual drops evaporating ($Y(r)$) and measurements of the large-scale observed energy transfer ($\partial K /\partial t$) according to
+\begin{align}
+\frac{\partial K}{\partial t} = \int Y(r)\phi(r) dr\label{eq:Kdt}
+\end{align}
+where $\frac{\partial K}{\partial t}$ is in Watts/m$^2$, $Y(r)$ is in Joules, and $\phi(r)$ is the number of drops per m$^2$ per second per $\mu$m.\par 
+
+\subsection{The total energy transfer}
+
+Control volume analysis conducted by \citet{Bell2012} demonstrated a method for calculating the surface flux from measurements. \citet{Bell2012} starts from the conservation of energy equation, with the assumptions that the time variations in pressure, frictional diffusion, thermal conductivity, and radiation are sufficiently small to be neglected, such that
+\begin{align}
+ \frac{\partial (\rho E)}{\partial r} + \frac{\partial (\rho r u E)}{r \partial r}+ \frac{\partial (\rho w E)}{\partial z}=0
+\end{align}
+for total energy $E$, density $\rho$, and velocity $[u,v,w]$.
+After assuming an axisymmetric flow field, a control volume in the $r-z$ plane defines the region over which the energy fluxes are integrated. As in \citet{Bell2012}, the CBLAST data describe the net energy flux through the spray layer according to equation \ref{eq:NetEFlux}.
+\begin{align}
+\begin{split}
+\int_{r_1}^{r_2} [F_{zk}- u\tau_{rz} - v\tau_{r\theta}]\bigg\rvert_{z_1}rdr =& \int_{z_1}^{z_2} r_2[\rho u E + F_{rk} + ue + \overline{u'e} - w\tau_{rz} - v\tau_{r\theta}]\bigg\rvert_{r_2}dz\\
+-& \int_{z_1}^{z_2} r_1[\rho u E + F_{rk} + ue + \overline{u'e} - w\tau_{rz} - v\tau_{r\theta}]\bigg\rvert_{r_1}dz\\
++& \int_{r_1}^{r_2} r_2[\rho w E + F_{zk} + we + \overline{w'e} - u\tau_{rz} - v\tau_{r\theta}]\bigg\rvert_{z_2}rdr\\
+-& \int_{r_1}^{r_2} r_2[\rho w E + we + \overline{w'e} ]\bigg\rvert_{z_1}rdr + \int_{z_1}^{z_2}\int_{r_1}^{r_2}\left[\frac{\partial (\rho E + e)}{\partial t}\right]rdrdz\\\label{eq:NetEFlux}
+\end{split}
+\end{align}
+where $\bullet'$ indicates an anomaly from the temporal and azimuthal average. The turbulent kinetic energy is defined as $e = \frac{1}{2}\rho(\overline{u'u'}+\overline{v'v'}+\overline{w'w'})$, the stress $\tau_{ab}$ = $-\rho\overline{a'b'}$, and the enthalpy fluxes $F_{\bullet k} = L_v q' w'$.\par 
+The profiles of this energy flux are shown in Figure \ref{Fig:CBLASTContour} along with the outline of the control volumes considered. The energy flux [Watts/m$^2$] is relatively constant the control volume. This stability is reassuring for attempting to find a drop size distribution with this data because large gradients in energy flux would provide a much larger uncertainty in the drop size distribution.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.25\textwidth]{imgs/E_and_e.png}
+\caption{Total energy (color) and $e$ contours from Isabel \label{Fig:CBLAST_Ee}}
+\end{figure}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.25\textwidth]{imgs/E_and_Psi.png}
+\caption{Total energy (color) and $\Psi$ contours from Isabel \label{Fig:CBLAST_EPsi}}
+\end{figure}
+
+As can be seen from Figure \ref{Fig:CBLASTContour}, the total energy is close to 350 kJ/kg, varying by only a few kJ throughout the control volume. The net energy exchange with the sea can be ascertained from the evaluation of Equation \ref{eq:NetEFlux} to yield a net transfer of approximately 10 to 100 Watts/m$^2$. Error analysis detailed in \citet{Bell2012} provide error bounds on this energy flux estimate.
+
+Evaluating control volumes that are 1km$^2$ in the $rz$ plane provides an evolution of the energy flux as a function of hurricane radius. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.25\textwidth]{imgs/flux_fxn_r.png}
+\caption{Each control volume is between z =0 and z = 1km, and 1km wide. \label{Fig:CBLAST_Flux_fxn_r}}
+\end{figure}
+
+
+\subsection{Energy transfer from a single drop}
+The coupled, non-linear equations describing the radius and temperaure evolution of a drop according to \citet{Pruppacher1978} are
+
+\begin{align*}
+\text{Temperature Evolution:}&\hspace*{1cm}\frac{\partial T}{\partial t} &=& \frac{3\Big(k_a'(T_a-T)+L_vD_w'(\rho_v-\rho_{v,r})\Big)}{\rho_sc_{ps}r^2}\\
+\vspace*{0.25cm}\\
+\text{Radius Evolution:}&\hspace*{1cm}\frac{\partial r}{\partial t} &=& \frac{[(f-1)-y]r^{-1}}{\frac{\rho_sRT_a}{D_w'M_we_{\text{sat}}(T_a)}+\frac{\rho_sL_v}{k_a'T_a}\left(\frac{L_vM_w}{RT_a}-1\right)}.
+\end{align*}
+The net energy transfer from a single drop reveals that the smallest drops have no thermodynamic effect, while the larger drops have the largest influence on the thermodynamics, but are also the largest momentum sink and are not aloft for very long. This microphysical analysis encourages us to seek a drop distribution that balances the number of small drops (which could not make up the entire drop distribution otherwise there would be no enhanced enthalpy flux as is required per \citep{Andreas2001}) with the number of large drops (which could not make up the entire drop distribution otherwise there would be a net energy loss through the spray layer and the hurricane would be unsustainable) and all the sizes in between. The thermal energy transfer for a sea spray drop of radius $r$ can be represented as
+\begin{align}
+Y(r) = Q_s - Q_L 
+\end{align}
+where $Q_s$ is the sensible heat released by the drop and $Q_L$ is the latent heat absorbed by the drop as it evaporates
+\begin{align}
+Q_s = c_p(T_0-T(t))\rho_s\frac{4}{3}\pi r_0^3\\
+Q_L = L_v\left(1-\left(\frac{r(t)}{r_0}\right)^3\right)\rho_s\frac{4}{3}\pi r_0^3
+\end{align}
+where $c_p$ is the specific heat capacity of the drop, $T_0$ is the sea surface temperature, $T(t)$ is the drop's temperature at time $t$ after ejection, $r_0$ is the initial radius of the drop, $L_v$ is the latent heat of vaporization of drop, and $r(t)$ is the radius of the drop at time $t$ after ejection.\par
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.25]{imgs/NetEnergy_singleDrop.png}
+\end{figure}
+The evaporating spray drop's radius and temperature evolve according to the microphysics described in \citet{Pruppacher1978} and \citet{Andreas1990}, except with updated formulas for the meteorological parameters \citep{Sharqawy2010,Nayar2016}. The acceleration of the drop in extreme wind speeds evolves according to \citet{Andreas2004}, and the height of the drop is assumed to go as $h = l_c\sin(t/t_f2\pi)$ where $l_c$ is the Charnock length scale. Setting the peak height $l_c$ to the Charnock length scale $\sqrt{U_*^2/g}$ is motivated by the scaling arguments in \citet{Emanuel2003}.
+This height choice agrees well with common estimates of the boundary layer height being 10m, and also agrees well with the re-entrant spray timescale for the drop size that is the mode of most proposed drop size distributions. Since the vortices in the hurricane boundary layer have aspect ratios of approximately unity, we estimate many drops will return to the sea after they reach their wet bulb temperature but before they have evaporated 1\% of their initial mass.  A drop of spume sheared away from the ocean, carried by a turbulent eddy before being re-deposited corresponds well with a frictional velocity of 50 m/s carrying a drop around a circular trajectory that has the diameter of the Charnock length scale about 16 meters, and then redepositing the drop into the ocean after about one second of flight, or approximately the amount of time it takes for a drop to cool to its wet bulb temperature. \par 
+Since not all drop radii are stable at a given wind speed, we use the critical Weber number to determine the cutoff radius after which we assume that any drop this size will immediately break up. This assumption is implemented by assuming that drops with radii larger than the critical Weber number permits transfer no enthalpy. 
+\begin{figure}
+\centering
+\includegraphics[scale=.25]{imgs/plot_linear.png}
+\caption{Heat transfer as a function of drop radius.}
+\end{figure}
+
+\subsubsection{(Move to Appendix?)Sensitivity to fixed parameters}
+
+We evaluate the sensitivity to several meterological parameters including the wind speed $U_*$, the height to which the drop is elevated, the temperature difference between the sea and the air $\Delta T$, the relative humidity in the spray layer $RH$,  and the time of flight of the drop $t_f$ using the non-dimensional sensitivity index as described in \citet{Hamby1994}.\\
+\begin{align}
+SI_Y = \frac{Y(X_{\max}) - Y(X_{\min})}{Y(X_{\max})}
+\end{align}
+The full microphysical model was run using all the default parameters, except for one parameter which was set to an extreme value. The default parameters and extreme values are listed in table 
+
+\begin{table}[h]
+\centering
+\begin{tabular}{r l l c l }
+Parameter& & Default & Range & $SI_Y$\\
+\hline
+h &[m] & 15.96 & 6.4 22.4 & 0.000204  \\
+U &[m/s] & 50 & 20 70 & 0.00195  \\
+RH &[\%] & 90 & 80 99 & 0  \\
+$t_f$ &[s] & 1 & 0.1 10 & -0.0081  \\
+$\Delta T$ &[K] & 2 & 1 5 & -0.001  \\
+S &[ppm] & 34 & 30 38 & 0.00016 \\
+\end{tabular}
+\caption{The microphysical model is run with these different values}
+\end{table}
+
+
+ 
+
+Drops accelerate to match the windspeed very quickly, such that the drop sizes we are considering here can be considered to be moving with the flow in less than $10^{-2}$ seconds \citep{Andreas2004}.
+
+
+\section{Results and Discussion}
+We ran the microphysical model for our default parameters, and considered a gamma distribution for the SSGF.
+Different parameters for the gamma distribution, the shape parameter $a$ and the scale parameter $b$, provide different net energies according to equation \ref{eq:Kdt}. We fix the volume flux according to the experimental volume flux obtained in \citet{Ortiz-Suslow2016} and explore the space of $a,b$ to ascertain the energy flux for different distributions. \par 
+From this plot we can identify candidate distributions that produce the energy flux corresponding to observations. We can see from this contour plot that the range of sampled distributions for this volume well-covers the range of the anticipated flux from the control volume (206 W/m$^2$).
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.25\textwidth]{imgs/ContourPlt.png}
+\caption{Contours of energy flux provided to the air by drops minus the anticipated flux from control volume$_1$ flux in Watts/m$^2$ for different gamma parameters, the nine locations marked with $\bullet$ are shown in Figure \ref{Fig:ExSlopes}\label{Fig:EContour}}
+\end{figure}
+\begin{figure}[h!]
+\includegraphics[width=0.25\textwidth]{imgs/sample_dist.png}
+\caption{Different gamma distribution parameters that correspond to the markers in the adjacent Figure\label{Fig:ExSlopes}}
+\end{figure}\\
+
+
+\newpage
+\section{Conclusions}
+We have shown that the microphysics of spray evaporation can provide all of the heat required to power a hurricane according to control volume analysis in the eyewall. We have shown that there is only a very small sensitivity to the meterological parameters and that there is a failry narrow range of gamma distribution parameters which will produce a given energy flux.
+
+\begin{itemize}
+\item
+the energy exchange can be described by the microphysics of spray evaporation
+\item
+we can bound the DSD by considering the net energy flux
+\item
+drop collisions are important because they allow for large drops to be created but then lose a significant portion of their mass after collision
+\item
+a lognormal distribution fits the data well
+\item
+the gradient in energy flux is relatively constant which makes this analysis possible
+\item
+Direct numerical simulations of the spray layer and further experiments and observations are needed to improve the accuracy of hurricane spray. 
+\end{itemize}
+
+
+
+
+
+\bibliographystyle{apa}
+\bibliography{../References/bibtex/TheoreticalDSD}
+\end{document}
+
+
+% momentum transfer 
+\begin{itemize}
+\item
+waves radiated away \citet{Nilsson1995}
+\item
+ocean mixing
+\item
+irreversible loss of kinetic energy due to drop collisions with eachother or the air
+\item
+momentum transfer due to drops
+\item
+heat transfer due to drops
+\end{itemize}

@@ -1,0 +1,284 @@
+ \documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{multicol}
+
+% bibliography
+\usepackage[authoryear]{natbib}
+
+% figures
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+%text format
+\usepackage{color}
+
+
+% document propoerties format
+\usepackage[margin=0.75in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage[section]{placeins}
+% \doublespacing
+\begin{document}
+
+ \renewcommand{\theenumi}{\Roman{enumi}}
+ \renewcommand{\theenumii}{\arabic{enumii}}
+ \renewcommand{\theenumiii}{\alpha{enumiii}}
+ 
+\section{Summary}
+
+\large
+
+New approximations for the temperature and radius of an evaporating saline water drop are used to investigate the spume contribution to the enthalpy flux in the hurricane spray layer. Using a spray generating function that realizes the bag-breakup mechanism of spume creation in conjunction with these approximations suggest that the spray can support much more of the total enthalpy flux than previously thought.
+
+ \section{Introduction/Background/Motivation}
+ 
+%It was shown in \citet{Andreas2001} that re-entrant sea spray accounted for enhanced enthalpy flux that was necessary for models to realize moderate to strong hurricanes. This work builds on those ideas, but rather than allowing the dynamics of a 100$\mu$m drop to be representative of the net flux, new approximation formulas describe the thermodynamics of sea spray based on the environmental conditions and allow for a refinement of the total heat flux. Recently published spray generating functions (SGFs) used in conjuction with this new approximation show that the sea spray can support much more of the enthalpy flux than previously thought; this analysis suggests that up to 100\% of the enthalpy flux may come from sea spray.
+
+As in previous work \citep{Andreas1990,Andreas2001}, the case of a salt-water drop ejected into constant-temperature air is considered. After a short time aloft, the drop cools to its salinity-adjusted, wet-bulb temperature typically evaporating less than 1\% of its mass in the process. The evolution of the drop's temperature $(T)$ and radius $(r)$ represent a coupled and highly-nonlinear system of equations which are described in \citet{Pruppacher1978}. Using the notation from \citet{Andreas2005}, the evolution equations are
+\begin{align}
+\frac{\partial T}{\partial t} &= \frac{3\Big(k_a'(T_a-T)+L_vD_w'(\rho_v-\rho_{v,r})\Big)}{\rho c_{p}r^2} \label{eq:dTdt}\\
+\frac{\partial r}{\partial t} &= \frac{[(RH-1)-y]r^{-1}}{\frac{\rho_sRT_a}{D_w'M_we_{\text{sat}}(T_a)}+\frac{\rho L_v}{k_a'T_a}\left(\frac{L_vM_w}{RT_a}-1\right)}\label{eq:drdt}
+\end{align}
+where $k_a'$ is the thermal conductivity, $T_a$ is the ambient air temperature, $L_v$ is the latent heat of vaporization, $D_w'$ is the vapor diffusivity, $\rho_v$ is the ambient vapor density, $\rho_{v,r}$ is the vapor density at the drop surface, $\rho$ is the water density, $c_p$ is the specific heat of water, $RH$ is the relative humidity, $y$ is the drop's curvature parameter, $R$ is the universal gas constant, $M_w$ is the molar mass of water, and $e_{sat}$ is the saturated water vapor partial pressure.
+Figure \ref{fig:singleDrop} shows the numerical solution to this system of equations using the sea water properties from \citet{Nayar2016}.\par 
+During evaporative cooling, the drop cools according to the competing effects of thermal diffusion and vapor pressure disequilibrium as shown in Equation \ref{eq:dTdt}. The result is that the drop achieves a temperature lower than that of the ambient environment. Only after a long time aloft will the drop begin to evaporate a significant fraction of its mass as it absorbs latent heat from the air. As elucidated in \citet{Andreas2001}, since most drops are likely to fall back to the sea after they have released a burst of sensible heat, but before they have absorbed much latent heat, they enhance the air-sea enthalpy flux. Another way to understand this enthalpy enhancement is that when the drops re-enter the sea, they are substantially cooler, thus cooling the sea as much as they heated the air. \par 
+The formulas for sensible and latent heat transferred from the drop to the air are
+\begin{align}
+q_s &= \rho c_p \left(T_s - T(t)\right)\left(\frac{4}{3}\pi r_0^3\right)\\
+Q_s &= q_s \frac{dF}{dr}\label{eq:Qs}\\
+q_L &= -\rho L_v \left(1 - \frac{r(t)^3}{r_0^3}\right)\left(\frac{4}{3}\pi r_0^3\right)\\
+Q_L &= q_L \frac{dF}{dr}\label{eq:QL}
+\end{align}
+%where $\rho$ is the density of sea water, $c_p$ is the specific heat capacity of sea water, $T_s$ is the ambient temperature of sea water, $T$ is the temperature of the drop, $r_0$ is the initial radius of the drop, $L_v$ is the latent heat of vaporization, and $r$ is the radius of the drop. 
+The energy transfer in Joules is represented by $q_s$ (sensible) and $q_L$ (latent), while the fluxes in Watts per square meter per micrometer are $Q_s$ (sensible) and $Q_L$ (latent). The sea spray generating function $\frac{dF}{dr}$ is the number of drops ejected per square meter, per second, per drop radius. \par 
+
+\section{Methods}
+The evolution of a drop's radius and temperature are influenced by the ambient thermodynamic conditions. Figures \ref{fig:changeRH},\ref{fig:changeDT}, and \ref{fig:changer0} show the effects of the relative humidity ($RH$), air-sea temperature difference ($\Delta T$), and the initial drop radius ($r_0$), respectively. \par 
+The estimated time of flight $\tau_f$ (denoted by the vertical lines in Figures \ref{fig:changeRH} through \ref{fig:changer0}) comes from \citet{Andreas1992} 
+\begin{align}
+\tau_f = \frac{0.015 U_{10}^2}{u_f} \label{eq:tauf}
+\end{align}
+for 10m wind speed $U_{10}$ and Stokes fall speed $u_f$. \par 
+Since the radius and temperature evolve in a predictable way with respect to the environmental parameters (see Figures \ref{fig:changeRH}, \ref{fig:changeDT}, and \ref{fig:changer0}), it is possible to construct a fit for these two drop characteristics that is very reliable at least until the drop is predicted to re-enter the sea. The temperature evolution is modeled as a sum of exponentials, where the coefficients $c$ and $\tau$ are functions of one, two, or all three of $RH$, $\Delta T$, and $r_0$ and are available in the appendix.
+\begin{align}
+T(t) &= c_1e^{-t/\tau_1}+c_2e^{-t/\tau_2} \label{eq:T_est}\\
+r(t) &= c_3 t + c_4 \label{eq:r_est}
+\end{align}
+ 
+To evaluate the range and efficacy of the approximation in Equations \ref{eq:T_est} and \ref{eq:r_est}, 460 profiles are shown in Figure \ref{fig:error_prof_div}. Each profile is of the estimated quantity divided by the quantity from the full microphysical model and extends until each drop's $\tau_f$ according to Equation \ref{eq:tauf}. The agreement is very good, generally within 1\%. \par 
+
+To get the total flux, Equations \ref{eq:Qs} and \ref{eq:QL} are integrated over the drop radii. The values of $T$ and $r$ are evaluated at time $\tau_f$. 
+
+\begin{align}
+H_{K_{\text{spray}}} = \int Q_s(\tau_f(U_{10},r_0)) dr_0 + \int Q_L(\tau_f(U_{10},r_0)) dr_0
+\end{align}
+
+The SGF in \citet{Troitskaya2018} finds that the primary mechanism for drop creation in extreme wind speeds is bag-break up, which suggests that there are many more large drops than previously published SGFs predict.
+
+\section{Results}
+The enthalpy flux equation relates the enthalpy disequilibrium to the 10m wind speed and the enthalpy exchange coefficient
+\begin{align}
+H_K = C_K\rho_aU_{10}(k_0-k_{10})
+\end{align}
+where $\rho_a$ is the density of air and $k$ is the specific enthalpy ($c_pT+L_vq$). The spray relation can be written 
+\begin{align}
+\nonumber Q_s+Q_L = C_{K_{\text{spray}}}\rho_aU_{10}(k_0-k_{10})\\
+C_{K_{\text{spray}}}  = \frac{Q_s+Q_L}{\rho_aU_{10}(k_0-k_{10})}
+\end{align}
+Using the approximations to model $T$ and $r$, $C_{K_{spray}}$ can be found for different values of $\Delta T$, $RH$, and $U_{10}$ using the SGF from \citet{Troitskaya2018}, these data are shown in Figure \ref{fig:CK_fit}.\par
+The total enthalpy flux from the sea spray can be computed from these expressions and the spray can contribute, for a modest 10m wind of 35 m/s, more than 450 W/m$^2$ as shown in Figure \ref{fig:Qs_min_QL}. This suggests that far more of the enthalpy flux can be supported by the spray than previous estimates. The increase in flux is due to the increased proportion of large drops. 
+
+%\begin{enumerate}
+%\item fit curves to CK values
+%\item gather more values from the Troitskaya paper
+%\end{enumerate}
+
+\newpage
+\section{Figures}
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[t!]{0.75\textwidth}
+        \includegraphics[width=\textwidth]{imgs/singleDrop.png}        
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+      %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[t!]{0.2\textwidth}
+        \includegraphics[width=\textwidth]{imgs/singleDropLegend.png}        
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+    %(or a blank line to force the subfigure onto a new line)
+       \caption{The evolution of a single 100$\mu$m drop where RH = 90\% and $\Delta$T is 3K.  }
+       \label{fig:singleDrop}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+        \includegraphics[width=\textwidth]{imgs/qsqL_drops.png}        
+       \caption{The energy transfer from drops of different initial radii for different flight times where RH = 90\% and $\Delta$T is 3K. }
+       \label{fig:qsqL}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[t!]{0.75\textwidth}
+        \includegraphics[width=\textwidth]{imgs/changeRH.png}        
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+      %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[t!]{0.2\textwidth}
+        \includegraphics[width=\textwidth]{imgs/changeRH_Legend.png}        
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+    %(or a blank line to force the subfigure onto a new line)
+       \caption{As the relative humidity increases, the wet bulb temperature increases, and the drop takes longer to evaporate the same amount of its radius. The dashed, vertical line indicates the expected time of flight according to equation \ref{eq:tauf} for $U_{10} = 50$m/s.  \label{fig:changeRH}}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[t!]{0.75\textwidth}
+        \includegraphics[width=\textwidth]{imgs/changeDT.png}        
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+      %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[t!]{0.23\textwidth}
+        \includegraphics[width=\textwidth]{imgs/changeDTLegend.png}        
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+    %(or a blank line to force the subfigure onto a new line)
+       \caption{As the difference between the sea and air temperature increases, the wet bulb temperature increases, the disparity between the drop's initial temperature and its wet bulb temperature increases. The radius evolution is comparitively unaffected by an increase in $\Delta T$.\label{fig:changeDT}}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[t!]{0.75\textwidth}
+        \includegraphics[width=\textwidth]{imgs/changer0.png}        
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+      %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[t!]{0.2\textwidth}
+        \includegraphics[width=\textwidth]{imgs/changer0Legend_1.png}        
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+    %(or a blank line to force the subfigure onto a new line)
+       \caption{Drops of different radii in the same ambient conditions will achieve very nearly the same wet-bulb temperature, but larger drops take longer to reach their wet bulb temeprature, longer to evaporate, and have shorter residency times. \label{fig:changer0}}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+        \includegraphics[width=\textwidth]{imgs/error_prof_div.png}        
+       \caption{The ratio of both the estimated temperature to the microphysical model temperature and the ratio of the estimated radius to the extimated model radius vary for the range of RH, $\Delta T$, and $r_0$ examined, but generally remain within a few percent of unity. \label{fig:error_prof_div}}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[t!]{0.33\textwidth}
+        \includegraphics[width=\textwidth]{imgs/CK_RH.png} \caption{\label{fig:CK_RH}}   
+    \end{subfigure}
+    \begin{subfigure}[t!]{0.33\textwidth}
+        \includegraphics[width=\textwidth]{imgs/CK_DT.png}   
+        \caption{\label{fig:CK_DT}}
+    \end{subfigure}
+        \begin{subfigure}[t!]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{imgs/CK_U.png}   
+        \caption{\label{fig:CK_U}}
+    \end{subfigure}
+    %(or a blank line to force the subfigure onto a new line)
+       \caption{Calculating $C_K$ using the approximation formulas for $T(t)$ and $r(t)$ \label{fig:CK_fit}}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+        \includegraphics[width=\textwidth]{imgs/many_SGF_spray_flux_CK_U_TroitOnly.png} \caption{The x's represent the magnitude of sensible heat provided, the o's represent the magnitude of latent heat absorbed, and the squares represent $Q_s+Q_L$.\label{fig:Qs_min_QL}}   
+\end{figure}
+
+
+%
+%
+%
+%
+%\section{Scaling of Enthalpy Flux} 
+%
+%Even though larger drops can contribute more enthalpy, as shown in Figure \ref{fig:qsqL}, the wind field has to expend energy to accelerate and elevate drops. The wind will impart kinetic energy ($\frac{1}{2}\rho \frac{4}{3}\pi r^3 v^2$) and gravitational potential energy ($\rho \frac{4}{3}\pi r^3 gh$), both of which are proportional to the mass. An expression for which drop contributes the most energy per unit mass is
+%
+%\begin{align}
+%\max& \qquad \frac{q_s + q_L}{\rho \frac{4}{3}\pi r_0^3}\\
+%\max& \qquad \frac{c_p \left(T_s - T\right)\rho \frac{4}{3}\pi r_0^3  -\rho L_v \left(1 - \frac{r^3}{r_0^3}\right)\frac{4}{3}\pi r_0^3}{\frac{4}{3}\pi r_0^3}\\
+%\max& \qquad c_p \left(T_s - T\right)  - L_v \left(1 - \frac{r^3}{r_0^3}\right)
+%\end{align}
+%
+%This final expression already provides some confirmation of the intuitive conclusion that the faster the drop temperature decreases without a significant change in radius, will provide the most enthalpy. The drop also has to be aloft long enough to realize some significant temperature drop, though from Figure \ref{fig:qsqL} it can be seen that the larger drops always contribute more enthalpy per unit time, until the radius shrinks substantially. Figure \ref{fig:qsqL_div_mass} shows the same calculation as Figure \ref{fig:qsqL}, except normalized by the mass. Note that the full microphysical model is used to acquire both Figures \ref{fig:qsqL} and \ref{fig:qsqL_div_mass}.
+%\begin{figure}[h!]
+%    \centering
+%    \begin{subfigure}[t!]{0.65\textwidth}
+%        \includegraphics[width=\textwidth]{imgs/qsqL_drops_div_mass.png}        
+%    \end{subfigure}
+%    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+%      %(or a blank line to force the subfigure onto a new line)
+%    \begin{subfigure}[t!]{0.65\textwidth}
+%        \includegraphics[width=\textwidth]{imgs/qsqL_drops_div_mass_tof.png}   
+%        \caption{Unfortunately, even though $\tau_f$ is monotonic with $r_0$, $q_L$ depends on $(1-(r(\tau_f)/r_0)^3)$ and this term is non-monotonic which causes the apparently noisy behavior. }     
+%    \end{subfigure}
+%    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+%    %(or a blank line to force the subfigure onto a new line)
+%       \caption{The drop which contributes the most enthalpy per unit mass is a function of the time spent aloft. \label{fig:qsqL_div_mass}}
+%\end{figure}
+%
+% 
+% \begin{figure}[h!]
+%    \centering
+%        \includegraphics[width=\textwidth]{imgs/many_SGF_spray_flux_est_exact.png}        
+%       \caption{ \label{fig:many_SGF_spray_flux_est_exact}}
+%\end{figure}
+ 
+\newpage
+\section{Appendix}
+
+\begin{align}
+T(t) &= c_1e^{-t/\tau_1}+c_2e^{-t/\tau_2} \\
+c_1 &= \alpha_1 RH + \alpha_2 \Delta T + \alpha_3 \\
+c_3 &= \alpha_4 RH + \alpha_5 \Delta T + \alpha_6  \\
+\begin{split}
+\tau_1 &= (a_7RH+a_8 \Delta T+a_9) e^{a_{10}RH+a_{11}\Delta T+a_{12})r_0}+\\
+&(a_{13}RH+a_{14} \Delta T+a_{15}) e^{a_{16}RH+a_{17} \Delta T+a_{18})r_0}
+\end{split}\\
+\tau_2 &= (\alpha_{19} RH+\alpha_{20} \Delta T+\alpha_{21})/r_0^2+\alpha_{22} 
+\end{align}
+Since the radius evolution is nearly linear up to $\tau_f$, the radius evolution can be modeled with a linear equation where the coefficients are functions of $r_0$.
+\begin{align}
+ r(t) &= c_3 t + c_4 \\
+c_3 &= (\beta_1 RH+\beta_2 \Delta T+\beta_3)\frac{1}{r_0}+(\beta_4 RH^2+\beta_5 RH+\beta_6 \Delta T+\beta_7) \\
+c_4 &= \beta_3 r_0+\beta_4 
+\end{align}
+
+The constants for these fits can be found in Table \ref{tab:coeffs} of the appendix.
+
+\begin{table}[!h]
+\centering
+\caption{Fitted constants for $r(t)$ and $T(t)$. \label{tab:coeffs}}
+\hspace*{-0.25in}\begin{tabular}{rlrlrlrlrlrl}
+$\alpha_{1}=$ & 0.140 & $\alpha_{2}=$ & -0.926 & $\alpha_{3}=$ & 15.141 & $\alpha_{4}=$ & -0.137 & $\alpha_{5}=$ & 0.917 &  \\
+$\alpha_{6}=$ & 13.644  & $\alpha_{7}=$ & -7.94E-07  & $\alpha_{8}=$ & 9.88E-06 & $\alpha_{9}=$ &  5.61E-05& $\alpha_{10}=$ & -6.651E-06 & \\
+  $\alpha_{11}=$  & -2.01E-04 & $\alpha_{12}=$ & 3.58E-03 & $\alpha_{13}=$ & 2.43E-05  & $\alpha_{14}=$ & 4.54E-05 & $\alpha_{15}=$ &  -2.45E-03 & \\
+$\alpha_{16}=$ & 3.50E-04&   $\alpha_{17}=$  & 2.97E-03& $\alpha_{18}=$ & -4.60E-02 & $\alpha_{19}=$ & 328.15 & $\alpha_{20}=$ & -2079.22 & \\
+$\alpha_{21}=$ &  52,318.8 & $\alpha_{22}=$ &0.013&   & & & \\
+ $\beta_{1}=$ & 1.55E-06 & $\beta_{2}=$ & 4.13E-07 & $\beta_{3}=$ & -1.523E-08 & $\beta_{4}=$& 8.19E-12 & $\beta_5=$ & -1.523E-09 \\
+ $\beta_6=$ &-5.772E-11 & $\beta_7$= & 7.072E-08 & $\beta_8$= & 1.00E-06 & $\beta_9=$ &6.262E-09\\
+\end{tabular}
+\end{table} 
+ 
+ 
+ 
+\newpage
+
+\bibliographystyle{apa}
+\bibliography{../References/bibtex/all_of_everything}
+ 
+ 
+\end{document}

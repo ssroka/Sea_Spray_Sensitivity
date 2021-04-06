@@ -1,0 +1,41 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\astroncite{Beard and Ochs}{1995}]{Beard1995}
+Beard, K.~V. and Ochs, H.~T. (1995).
+\newblock {Collisions between Small Precipitation Drops. Part II: Formulas for
+  Coalescence, Temporary Coalescence, and Satellites}.
+
+\bibitem[\protect\astroncite{Beard et~al.}{2001}]{Beard2001}
+Beard, K.~V., Ochs, H.~T., and Liu, S. (2001).
+\newblock {Collisions between Small Precipitation Drops. Part III: Laboratory
+  Measurements at Reduced Pressure}.
+\newblock {\em Journal of the Atmospheric Sciences}, 58(11):1395--1408.
+
+\bibitem[\protect\astroncite{Choi et~al.}{2016}]{Choi2016}
+Choi, J.~I., Park, Y., Kwon, O., and Lee, C. (2016).
+\newblock {Interparticle collision mechanism in turbulence}.
+\newblock {\em Physical Review E}, 93(1):1--9.
+
+\bibitem[\protect\astroncite{Ochs et~al.}{1994}]{Ochs1994}
+Ochs, H.~T., Beard, K.~V., Czys, R., Laird, N., Schaufelberger, D., and
+  Holdridge, D. (1994).
+\newblock {Collisions between Small precipitation drops Part I}.
+\newblock {\em Journal of Atmospheric Sciences}, 52(12).
+
+\bibitem[\protect\astroncite{Pruppacher and Klett}{1978}]{Pruppacher1978}
+Pruppacher, H.~R. and Klett, J.~D. (1978).
+\newblock {\em {Microphysics of Clouds and Precipitation}}.
+\newblock Springer Netherlands, Dordrecht.
+
+\bibitem[\protect\astroncite{Saffman and Turner}{1956}]{Saffman1956}
+Saffman, P. and Turner, J. (1956).
+\newblock {On the disintegration of Drops in Turbulent Flow}.
+\newblock {\em Journal of Fluid Mechanics}, (November 1955):16--30.
+
+\bibitem[\protect\astroncite{Zhang et~al.}{2009}]{zhang2009}
+Zhang, J.~A., Drennan, W.~M., Black, P.~G., and French, J.~R. (2009).
+\newblock {Turbulence Structure of the Hurricane Boundary Layer between the
+  Outer Rainbands}.
+\newblock {\em Journal of the Atmospheric Sciences}, 66(8):2455--2467.
+
+\end{thebibliography}

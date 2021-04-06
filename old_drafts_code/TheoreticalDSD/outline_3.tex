@@ -1,0 +1,170 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{multicol}
+
+% bibliography
+\usepackage[authoryear]{natbib}
+
+% figures
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+%text format
+\usepackage{color}
+
+
+% document propoerties format
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage{multicol}
+
+\begin{document}
+
+ \renewcommand{\theenumi}{\Roman{enumi}}
+ \renewcommand{\theenumii}{\arabic{enumii}}
+ \renewcommand{\theenumiii}{\alpha{enumiii}}
+\section{Abstract}
+\begin{enumerate}
+\item We can use micro-physics of evaporation to describe the air-sea enthalpy flux in the hurricane spray layer.\\
+\item Sea spray can account for 100\% of the enthalpy flux 
+\end{enumerate}
+
+\section{Introduction-Motivation}
+\begin{enumerate}
+\item Predicting the hurricane's intensity depends critically on the transfer of enthalpy from the warm sea water.
+\item Drop size distributions has been measured in laboratory experiments and is of particular interest for describing how much enthalpy and momentum are exchanged in the hurricane spray layer. This work focuses on the enthalpy transfer. 
+\item This analysis shows that the enthalpy flux can be supported entirely by the sea spray, as opposed to partially reliant on the spray and partially reliant on the wave-induced enthalpy flux. This also demonstrates which sea spray generating functions (which are drop size distributions per unit area per unit time) are candidates for supplying the requisite enthalpy, based off previous work which demonstrates filament break-up produces a gamma distribution of drop sizes. 
+\end{enumerate}
+
+\section{Methods}
+\begin{enumerate}
+\item Consider: $\frac{\partial K}{\partial t} = \int Y(r)\phi(r) dr\label{eq:Kdt}$\\
+for $\frac{\partial K}{\partial t}$ the total enthalpy flux [W/m$^2$], $Y(r)$ the enthalpy transfer in Joules of individual drops, and $\phi(r)$ the sea spray generating function in number of drops per m$^2$ per second per drop radius radius.  We will explore possible values of $\phi(r)$.
+\item integration of enthalpy flux from Bell
+\begin{enumerate}
+\item energy equation to integrate\\
+\begin{align}
+ \frac{\partial (\rho E)}{\partial r} + \frac{\partial (\rho r u E)}{r \partial r}+ \frac{\partial (\rho w E)}{\partial z}=0
+\end{align}
+for total energy $E$, density $\rho$, and velocity $[u,v,w]$.
+\item result of control volume integration\\
+\begin{align}
+\begin{split}
+\int_{r_1}^{r_2} [F_{zk}- u\tau_{rz} - v\tau_{r\theta}]\bigg\rvert_{z_1}rdr =& \int_{z_1}^{z_2} r_2[\rho u E + F_{rk} + ue + \overline{u'e} - w\tau_{rz} - v\tau_{r\theta}]\bigg\rvert_{r_2}dz\\
+-& \int_{z_1}^{z_2} r_1[\rho u E + F_{rk} + ue + \overline{u'e} - w\tau_{rz} - v\tau_{r\theta}]\bigg\rvert_{r_1}dz\\
++& \int_{r_1}^{r_2} r_2[\rho w E + F_{zk} + we + \overline{w'e} - u\tau_{rz} - v\tau_{r\theta}]\bigg\rvert_{z_2}rdr\\
+-& \int_{r_1}^{r_2} r_2[\rho w E + we + \overline{w'e} ]\bigg\rvert_{z_1}rdr + \int_{z_1}^{z_2}\int_{r_1}^{r_2}\left[\frac{\partial (\rho E + e)}{\partial t}\right]rdrdz\\\label{eq:NetEFlux}
+\end{split}
+\end{align}
+\begin{center}
+\hspace*{-1in}\includegraphics[width = \textwidth]{imgs/flux_fxn_r.png}
+\end{center}
+\end{enumerate}
+\item drop evolution equations from \citet{Pruppacher1978}
+\begin{align*}
+\text{Temperature Evolution:}&\hspace*{1cm}\frac{\partial T}{\partial t} &=& \frac{3\Big(k_a'(T_a-T)+L_vD_w'(\rho_v-\rho_{v,r})\Big)}{\rho_sc_{ps}r^2}\\
+\vspace*{0.25cm}\\
+\text{Radius Evolution:}&\hspace*{1cm}\frac{\partial r}{\partial t} &=& \frac{[(RH-1)-y]r^{-1}}{\frac{\rho_sRT_a}{D_w'M_we_{\text{sat}}(T_a)}+\frac{\rho_sL_v}{k_a'T_a}\left(\frac{L_vM_w}{RT_a}-1\right)}.
+\end{align*}
+\item analytical formulation of filament break up is a gamma distribution
+\begin{align*}
+f(x|a,b) &= \frac{1}{b^a\Gamma(a)}x^{a-1}e^{\frac{-x}{b}}\\
+\Gamma(a) &= \int_0^\infty x^{a-1}e^{-x}dx
+\end{align*}
+\end{enumerate}
+
+\subsection{Parameter Selection/Justification}
+\begin{enumerate}
+\item Volume Flux Scaling Analysis, the fixed volume flux that I consider ( 10(10$^{-6}$) $m^3/(m^2 s)$) is reasonable considering other published SSGF's (all of these appear in the 2016 Ortiz-Suslow paper, but I can add some more, also they only show the functions, not the integral of them to get the volume fluxes)\\
+\hspace*{-.5in}\includegraphics[width=\textwidth]{imgs/differentS0s_VolFlxs.png}\\
+Since the 10m wind speed will probably be significantly higher where the volume flux is the largest, we can expect that the volume fluxes that are specified when finding the the enthalpy flux are reasonable. There are very few locations in the observations where the 10m windspeed is less than 50 m/s and where the wind speed is approximately 50 m/s the flus is approximately 110 W/m$^2$ (see August 4).
+
+\item time of flight sensitivity study using a volume flux of 10(10$^{-6}$) $m^3/(m^2 s)$, shows some movement of the mean drop radius, but the longer time-of-flights which favor larger drops are less likely (assuming other items in this framework are correct) because the larger drops are not stable. We don't expect drops with radii much above 500 $\mu$m to survive since their Weber number is larger than the critical Weber number. \\
+\begin{center}
+\includegraphics[width = \textwidth]{imgs/E_contour_1.png}\\
+\includegraphics[width = \textwidth]{imgs/E_contour_2.png}\\
+\includegraphics[width = \textwidth]{imgs/E_contour_5.png}
+\end{center}
+\item The energy flux is relatively insensitive to variations in relative humidity and air-sea temperature difference.
+\end{enumerate}
+
+\section{Results}
+\begin{enumerate}
+\item Enthalpy transfer per drop for a fixed time aloft -abbreviated as time-of-flight (tof).\\
+\hspace*{-1.2in}\includegraphics[width=1.25\textwidth]{imgs/QsQL_drops.pdf}
+\begin{enumerate}
+\item The left figure shows the enthalpy transfer as a function of time for drops of different initial radii.\\
+\item The right figure shows the enthalpy transfered as a function of drop radius for different residency times.\\
+Since the enthalpy transfer requires a different amount of energy input for each size drop (i.e. a larger drop serves as a greater momentum sink than does a smaller drop, so we know that - even though the largest drops have the greatest capacity to transfer enthalpy - they cannot make up the majority of drops because more energy (in joules) would be spent keeping the drop aloft than would be gained by the latent heat release). 
+\item Since the drops sap momentum from the air at a rate proportional to their mass ($m_{drop}$) (accelerating the drop to the full windspeed from rest $\propto m_{drop}U_{10}$  and lifting the drop providing it with gravitational potential energy $m_{drop}gh$) we consider the optimal drop size to be the one that provides the most thermal energy with the smallest mass (in this plot mass is simply represented by $r_0^3$. 
+\end{enumerate}
+
+We see that the most efficient drop radius follows the mean of the gamma distribution, where the 'efficiency' is defined as the ratio of enthalpy transferred (in Joules) per unit mass of the drop. We know that the majority of drops cannot be large ($\approx$500$\mu$m or larger, because they are unstable at hurricane force winds, because their Weber number will be greater than the critical value of 10). 
+\item Show contour plot on energy\\
+\begin{center}
+\includegraphics[width = \textwidth]{imgs/E_contour_1.png}
+\end{center}
+
+\end{enumerate}
+
+\section{Discussion and Conclusion}
+\begin{enumerate}
+\item all the enthalpy transfer can be explained by the evaporation of drops
+\item the drop size distribution might change with the radius of the hurricane
+\end{enumerate}
+
+\newpage
+
+\bibliographystyle{apa}
+\bibliography{../References/bibtex/TheoreticalDSD}
+\end{document} 
+\begin{enumerate}
+\item $\frac{\partial K}{\partial t} = \int Y(r)\phi(r) dr\label{eq:Kdt}$\\
+for $\frac{\partial K}{\partial t}$ the total power flux [W/m$^2$], $Y(r)$ the enthalpy transfer in Joules of individual drops, and $\phi(r)$ the sea spray generating function in number of drops per m$^2$ per second per radius. 
+\item the CBLAST results let us get energy flux as a function of radius
+\begin{enumerate}
+\item figure of energy flux as a function of radius
+\begin{center}
+\includegraphics[width = 3in]{imgs/flux_fxn_r.png}
+\end{center}
+\end{enumerate}
+\item the microphysical equations in \citet{Pruppacher1978} tell us what the enthalpy transfer is from an individual drop\\
+\begin{enumerate}
+\item equations for the evolution of drop temperature and radius\\
+\begin{align*}
+\text{Temperature Evolution:}&\hspace*{1cm}\frac{\partial T}{\partial t} &=& \frac{3\Big(k_a'(T_a-T)+L_vD_w'(\rho_v-\rho_{v,r})\Big)}{\rho_sc_{ps}r^2}\\
+\vspace*{0.25cm}\\
+\text{Radius Evolution:}&\hspace*{1cm}\frac{\partial r}{\partial t} &=& \frac{[(f-1)-y]r^{-1}}{\frac{\rho_sRT_a}{D_w'M_we_{\text{sat}}(T_a)}+\frac{\rho_sL_v}{k_a'T_a}\left(\frac{L_vM_w}{RT_a}-1\right)}.
+\end{align*}
+\item equations of sensible and latent heat transfer from drops to air 
+\begin{align*}
+Q_s = c_p(T_0-T(t))\rho_s\frac{4}{3}\pi r_0^3\\
+Q_L = L_v\left(1-\left(\frac{r(t)}{r_0}\right)^3\right)\rho_s\frac{4}{3}\pi r_0^3
+\end{align*}
+The characteristic enthalpy transfer from a single drop (with a radius of 100$\mu$m) is about 10$^{-4}$ Joules, and if a hurricane extracts $\approx 100$ W/m$^{2}$, then we can expect that about one drop with a radius of 100$\mu$m to be created in each mm$^2$ per second, which works out to a volume flux of $\approx 4 10^{-6}$ m$^3$/(m$^2$ s). \\
+Independently, we find that the volume flux from a number of observational studies of the sea spray generating function ($S_0$) is \[ \int_r S0 \frac{4}{3}\pi r^3 dr \approx 8 10^{-6} m^3/(m^2 s)\] for $S0$ in units of number of drops created per m$^2$ per second. This scale analysis helps reinforce our confidence that the spray evaporation can account for all of the enthalpy flux.
+\item figure of sensible and latent heat exchange for different drop radii
+\begin{center}
+\hspace*{-2.5in}\includegraphics[scale=.5]{imgs/QsQL_drops.png}
+\end{center}
+\end{enumerate}
+\item It has been analytically shown that filament-break up produces a gamma distribution of drop sizes
+\begin{enumerate}
+\item see if I can include an image from the Miami tank experiment of drops being created off the back of waves
+\end{enumerate}
+\item We consider all drops to have a residency of 1 second in the air and a volume flux of $\approx 10 \times 10^{-6} m^3/(m^2 s)$. The magnitude of the enthalpy flux is approximately linear with the volume flux (the shape of the contour plot doesn't change, but if I double the volume flux I double the enthalpy flux).
+\item After conducting a parameter search in a range of possible gamma distributions, we find a relatively small amount of distributions that will provide the required head transfer
+\begin{enumerate}
+\item figure of contour plot of energy
+\hspace*{-3in}\includegraphics[width = 3.5in]{imgs/E_contour_1.png}
+\end{enumerate}
+\item Incorporating drop collisions may change the distributions slightly.
+\end{enumerate}
+
+
+

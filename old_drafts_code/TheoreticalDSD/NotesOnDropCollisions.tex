@@ -1,0 +1,206 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{multicol}
+
+% bibliography
+\usepackage[authoryear]{natbib}
+
+% figures
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+%text format
+\usepackage{color}
+
+
+% document propoerties format
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage{multicol}
+
+
+% title
+\usepackage[tt]{titlepic}
+\title{Notes on Drop Collisions}
+\date{ }
+
+\begin{document}
+\maketitle
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{imgs/collision_flow_diagram.png}
+\caption{Markov process for an evolving drop distribution based on the collision efficiency and the coalescence efficiency.}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{imgs/collision_flow_diagram_refs.png}
+\caption{Markov process for an evolving drop distribution based on the collision efficiency and the coalescence efficiency.}
+\end{figure}
+\newpage
+\subsection*{\citet{Choi2016}: how often do drops get within a given distance of eachother}
+
+\begin{itemize}
+\item
+Consider hard spheres over a wide range of stokes numbers
+\item
+use numerical simulations with $Re_\lambda = 70$
+\item
+volume fraction of the 2(64$^3$) particles is < 0.1\% all drops have the same diameter $d_p$ and the cube they occupy has an edge length of 2$\pi$
+\item
+considered steady state collisions (at each moment there are approximately $n$ many collisions), this can be used as a heuristic to say that particles are a given probability of coming within $r_1+r_2$ of another particle. From this we can get the expected offset distance and from that we can get the collision efficiency.
+\end{itemize}
+
+\subsection*{\citet{Pruppacher1978}: How often do two drops within a given distance of eachother collide? How do you simulate a turbulent flow field?}
+
+Chapter 14 on drop collisions and Chapter 15 on stochastic coalescence equations
+\begin{itemize}
+\item
+collision efficiency is a function of the offsett distance $y_c$
+\[ E \def \frac{y_c^2}{(a_1 + a_2)^2} \]
+\item
+can obtain a turbulent velocity field with a Monte Carlo approach (see appendix A14.5)
+\item 
+can obtain a description for the way two particles interact
+\end{itemize}
+
+\subsection*{\citet{Saffman1956} proposes a theory of collisions between small drops in a turbulent fluid.}
+
+\begin{itemize}
+\item
+number of collisions $=1.3(r_1+r_2)^3n_1n_2(\epsilon/\nu)^{1/2}$ for $1\leq r_1/r_2 \leq 2$
+\item 
+$E \approx 1$
+\end{itemize}
+
+\subsection*{\citet{Beard1995}: If the drops collide, how likely are they to 'bounce', 'coalesce','temporarily coalesce' based on their relative sizes.}
+
+\begin{itemize}
+\item At low pressures (<600mb)
+\[ \epsilon = 0.776 - 9.67X \]
+\[ \epsilon_c = 0.755 - 9.99X \]
+\[ \epsilon_B = 0.78 - 10.31X \]
+\[ X= g(p)We^{1/2} \qquad g(p) = (2^{3/}/6\pi)p^4(1+p)[(1+p^2)(1+p^3)]^{-1}\]
+\[p=r/R\]
+\item
+tendancy to coalesce decreases as $X$ increases
+\end{itemize}
+\subsection*{\citet{Beard2001}: If the drops collide, how likely are they to 'bounce', 'coalesce','temporarily coalesce' based on their relative sizes.}
+
+\begin{itemize}
+\item At low pressures (<600mb)
+\[ \epsilon = 0.767 - 10.14X \]
+\[ X= g(p)We^{1/2} \qquad g(p) = (2^{3/}/6\pi)p^4(1+p)[(1+p^2)(1+p^3)]^{-1}\]
+\[p=r/R\]
+\item
+tendancy to coalesce decreases as $X$ increases
+
+\item
+drops are considered much smaller than the small turbulent eddies which allows the collision rates to depend on the dimensions of the drops, the rate of energy dissipation, and the kinematic viscosity
+\item 
+consider an initially uniform distribution
+\item
+consider cloud drops
+\item
+turbulence could be important if the random air accelerations due to turbulence are comparable to the influence of gravity
+\item
+if the Reynolds number is large, the similarity theory will hold for small scale motion, so at scales sufficiently smaller than the enery0-containing eddies, the motion is isotropic and the mean values of the quantities concerned depend strongly on the small scale properties of the turbulence. the effect of turbulence in causing collisions between neighboring drops will also depend on the rate of turbulent energy dissipation per unit mass $\epsilon$\\
+in clouds measurements of $\epsilon$ have been 1000 cm$^2$sec$^{-3}$
+\end{itemize}
+
+
+\subsection{Considering the influence of drop breakup and collisions}
+The smallest drops do not constitute a net energy flux to the air since they evaporate, but do represent a net momentum sink, therefore it would be impossible to sustain a hurricane on just these smallest drops. On the other side of the spectrum, the largest drops while contributing to a larger enthalpy flux since they have more thermal mass, will be unstable in the fast wind speeds. We will not consider drops above the critical Weber number to contribute to the drop distribution, but rather only consider the eventual 'satellite drops' that they spawn since they break apart very quickly. 
+\paragraph{The Critical Weber Number}
+Many experimental and theoretical studies \citep{TARNOGRODZKI1993} find that the critical Weber number ($We_{cr}$) for a water drop accelerated through air is on the order of 10. Since breakup due to a supercritical Weber number will occur quickly, but not imediately, the time at which drops of various sizes will break up due to this instability is of crucial importantace. We will describe in detail in the next section the proposensity for drops to coalesce, and two drops which may have been sub critical individually will now be supercritical together, but breakup will only occur if the new, larger drop forms with enough time to vibrate apart before returning to the sea. 
+
+
+\subsubsection{Drop Collisions and Coalescence}
+
+While typical sea spray conditions can omit the complexity of drop collisions \citep{Veron2015}, there may be a threshold wind stress after which collisions become significant since some numerical simulations have suggested drop collisions are influential \citep{Shpund2014}. Specifically, frequent collisions are expected to generate small satellite drops which are expected to evaporate completely. Drops of similar size are much more likely to bounce apart, maintaining the initial drop-size distribution. The momentum flux should be less significantly impacted by drop collisions because the work that the wind stress does on the sea spray is primarily the initial ejection of the drops rather than keeping the drops aloft after ejection. While the numerical simulations will explicitly model drop collisions, we can construct a Markov process to anticipate the influence of collisions on the drop size distribution. The steps in this Markov chain are 
+\begin{enumerate}
+\item How frequently do any two drops come close enough to collide?\label{MC:1}
+\item Of the drops that come close enough to collide, what percentage actually collide?
+\item Of the drops that collide, how likely are they to bounce, coalesce, or temporarily coalesce?
+\item Of the drops that coalesce for any length of time, what size, if any satellite drops do they eject?
+\end{enumerate}
+We use the results from \citet{Choi2016}, which describe the steady state collision frequency across a variety of Stokes numbers to guide the first step in the Markov Chain. Specifically, the results from \citet{Choi2016} are adjusted to account for the relative probabilities of drops of different radii colliding with eachother. The second step is a well-defined quantity in drop collision literature called the collision efficiency ($E$); it is often assumed that $E=1$ (i.e. the flow induced by a moving drop does not influence the trajectories of other drops moving through the flow), which is reasonable for very small drops in Stokes flow, but for these water drops the collision efficiency we will use is that from TODO CHECK REFERENCE \citet{Ochs1994}. Step 3 is also a well-defined quantity in particle collision literature, namely the coalescence efficiency. The collision efficiency and satellite drop characteristics will be modeled from the experiments of \citet{Beard1995} and \citet{Beard2001}.
+
+Drop collisions will influence both the rate of heat transfer and momentum transfer. An example of the heat transfer rate changing because of a collision is when a moderately sized drop coalesces with another and ejects some number of satellite drops which completely evaporate. These satellite drops transfer mass without a net heating when the drop would have ordinarily evaporated less than 1\% of its mass and returned to the sea, effectively depressing the heat flux. An alternative example is when two small drops coalesce and avoid evaporating completely, thus enhancing the heat flux. Drop collisions which produce satellite drops that completely evaporate will enhance the mass flux rate and thereby increase the net drag or momentum flux into the sea. Conversely, drops which coalesce and don't evaporate completely reduce the net mass flux and thereby reduce the net momentum flux. It is important to see which of these effects governs the energy exchange in the turbulent hurricane spray layer, or if these influences destructively interfere in approximately equal proportions.
+
+It is crucial to note that this analysis assumes the density of drops is sufficiently sparse that we only need to consider one-on-one drop collisions as is done in TODO ADD LITERATURE HERE, however, some uncertainty around this assumption for sea spray at high wind speeds still exists which underlines the importtance of a high resolution simulation of the multi-phase, multi-scale, multi-physics simulation of the turbulent hurricane spray layer.
+%
+%If we consider the drop distribution to represent an initial distribution of drops, and then consider one drop to be a realization from that distribution that may collide with another according to the collision efficiency of the system, then a Markov process could define the ultimate drop distribution. 
+%The rate at which two drops come within a given distance of eachtoher for a variety of Stokes numbers is described in \citet{Choi2016}, who investigated the steady state collision frequency of a low-density chamber filled with uniform size particles moving at $Re=70$. We can adapt the metrics that were collected here for particles of varying sizes. \citet{Pruppacher1978}
+
+The crucial component of this process is the timing of the collisions, we only want to consider collisions that occur before the drops re-enter the sea which provides a small window. Also unlike cloud motions, the velocity in the turbulent flow region cannot be assumed to be random since the organized nature of eddies will impose an ordered type flow pattern.
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=0.7\textwidth]{imgs/collision_flow_diagram.png}
+\caption{Markov process for an evolving drop distribution based on the collision efficiency and the coalescence efficiency.}
+\end{figure}
+
+The rate at which drops come within a given radius of eachother is described by \citet{Choi2016}. The drop collision efficiency is described by \citet{Pruppacher1978}, the drop coalescence efficiency and the satellite drop statistics are described by \citet{Beard2001}.
+
+\section*{What is the stokes number of this flow?}
+
+According to section II of \citet{Choi2016} the Stokes number is the ratio of particle response time ($\tau_p$) to fluid response time ($\tau_\eta$). If St >> 1 then the particles move without too much consideration for the fluid that they are suspended in. If St << 1 then the particles are passive tracers in the fluid. 
+\[\tau_p = \frac{\rho_p d_p^2}{18\mu} \quad \tau_\eta = \left(\frac{\nu}{\epsilon}\right)^{(1/2)}\]
+* note that the Kolmogorov time scale is from wikipedia and I assume that $\rho_p$ means the fluid density. 
+
+We can assume a characteristic drop diameter of 100$\mu$m, air density of 1.2 kgm$^{-3}$, and dynamic viscosity of air of $1.7(10^{-5}$.
+\[\tau_p \approx 0.36\]
+
+We can use the calculation of the dissipation rate in \citet{zhang2009} of 500$(10)^{-4}m^2s^{-3}$ (see Figure 9).
+\[\tau_\eta \approx 0.0168\]
+which means the Stokes number is 
+\[ St \approx 20 \]
+
+The Taylor-scale Reynolds number is 
+\[Re_\lambda = \frac{u'\lambda}{\nu} \]
+where $u'$ is the and $\lambda$ is the Taylor-microscale
+\[\lambda = \left(\frac{15 \nu}{\epsilon}\right)^{1/2}u' \]
+for root-mean-squared velocity $u'$.
+
+If the 10m wind speed is 50 m/s, then the wind-speed near the surface is probably close to 20 m/s (using a standard logarithmic profile of wind speed with height). Let $u'=20$ m/s such that 
+
+\[\lambda = \left(\frac{15 \hspace*{2mm}(1.42\times10^{-5}) }{500(10^{-4})}\right)^{1/2}(20) \approx 1.3\]
+\[Re_\lambda = \]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\bibliographystyle{apa}
+\bibliography{../References/bibtex/dropCollision}
+
+
+
+
+
+\end{document}
