@@ -237,6 +237,7 @@ for tof_ind = 1:ntof
                         h(SST_count,1,3)= loglog(t_interp,T_interp,':',...
                             'displayname',sprintf('$T,$ $T_s = $%d $^{o}$C',...
                             SST_vec(SST_ind)),'linewidth',3,'color',c(SST_count,:));
+                        dt_3(SST_count) = max(T_interp)-min(T_interp);
                         hold on
                         yyaxis right
                         h(SST_count,2,3)= loglog(t_interp,r_interp,'-',...
@@ -295,11 +296,55 @@ for i = 1:4
     xlabel('$t$ [s]','interpreter','latex')
     lh(i) = legend([h(1,1,i) h(2,1,i) h(3,1,i) h(1,2,i) h(2,2,i) h(3,2,i)],...
         'location','eastoutside','interpreter','latex');
-    th = text(0.1,0.1,sprintf('(%s)',subplotLetter(i)));
-    set(th,'units','normalized','position',[0.01 0.07],'fontsize',20)
+    th = text(0.9,0.1,sprintf('(%s)',subplotLetter(i)));
+    set(th,'units','normalized','position',[0.9 0.07],'fontsize',20,'interpreter','latex')
     drawnow
 end
 set(gcf,'position',[132          31        1259         767],'color','w')
+
+drawnow
+
+subplot(2,2,3)
+yyaxis left
+% xc_vec = [7e2 3e2 0.9e2];
+% xc_vec_text = [4e2 1.8e2 0.5e2];
+
+xc_vec = [2e-2 1e-1 1];
+xc_vec_text = [1.2e-2 0.9e-1 0.9];
+yc_vec_text = [SST_vec(:)-dt_3(:) SST_vec(:)];
+for i = 1:3
+
+xlim = get(gca,'xlim');
+% xL = (log(xlim(2))-log(xlim(1)));
+% xc = [1 1]*(log(1e2)-log(xlim(1)))/xL;
+xc = [1 1]*xc_vec(i);
+ylim = get(gca,'ylim');
+% yL = (log(ylim(2))-log(ylim(1)));
+% yc(1) = (log(SST_vec(i)-2.6)-log(ylim(1)))/yL;
+% yc(2) = (log(SST_vec(i))-log(ylim(1)))/yL;
+yc = yc_vec_text(i,:);
+
+% plot([xlim(1) 5e2],[1 1]*SST_vec(i),'-','linewidth',1,'color',c(i,:));
+% plot([xlim(1) 5e2],[1 1]*(SST_vec(i)-dt_3(i)),'-','linewidth',1,'color',c(i,:));
+
+qh = quiver(xc(1),yc(1),diff(xc),diff(yc));
+qh.LineStyle = '-';
+qh.Color = c(i,:);
+qh.Marker = 'v';
+qh.MarkerFaceColor = c(i,:);
+qh = quiver(xc(2),yc(2),-diff(xc),-diff(yc));
+qh.Color = c(i,:);
+qh.Marker = '^';
+qh.LineStyle = '-';
+qh.MarkerFaceColor = c(i,:);
+
+th = text(xc_vec_text(i),SST_vec(i)-2.25,sprintf('%3.2f',dt_3(i)));
+set(th,'color',c(i,:),'BackgroundColor','white','fontsize',12)
+LH = get(gca,'Legend');
+LH.String = LH.String(1:6);
+end
+
+
 
 addpath('/Users/ssroka/Documents/MATLAB/util/')
 H = gcf;
