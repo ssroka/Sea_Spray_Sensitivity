@@ -17,8 +17,14 @@ nSSGF = length(SSGF_str_cell);
 
 R_titles = ...
     {'$\gamma_1 = \frac{\int \frac{T_s-T(\tau_f)}{T_s-T_w} \frac{dF}{dr_0} r_0^3 dr_0 }{ \int \frac{dF}{dr_0} r_0^3 dr_0}$',...
-    '$\gamma_3 = \frac{\int \frac{u(\tau_f)}{U_{10}} \frac{dF}{dr_0} r_0^3 dr_0 }{ \int \frac{dF}{dr_0} r_0^3 dr_0}$',...
     '$\gamma_2 = \frac{\int \left(\frac{r(\tau_f)}{r_0}\right)^3 \frac{dF}{dr_0} r_0^3 dr_0 }{ \int \frac{dF}{dr_0} r_0^3 dr_0}$',...
+    '$\gamma_3 = \frac{\int \frac{u(\tau_f)}{U_{10}} \frac{dF}{dr_0} r_0^3 dr_0 }{ \int \frac{dF}{dr_0} r_0^3 dr_0}$',...
+    '$\gamma_1 = \frac{\int \frac{T_s-T(\tau_b)}{T_s-T_w} \frac{dF}{dr_0} r_0^3 dr_0 }{ \int \frac{dF}{dr_0} r_0^3 dr_0}$',...
+    '$\gamma_2 = \frac{\int \left(\frac{r(\tau_b)}{r_0}\right)^3 \frac{dF}{dr_0} r_0^3 dr_0 }{ \int \frac{dF}{dr_0} r_0^3 dr_0}$',...
+    '$\gamma_3 = \frac{\int \frac{u(\tau_b)}{U_{10}} \frac{dF}{dr_0} r_0^3 dr_0 }{ \int \frac{dF}{dr_0} r_0^3 dr_0}$',...
+    '$\gamma_1 = \frac{\int \frac{T_s-T(\tau_{Hsu})}{T_s-T_w} \frac{dF}{dr_0} r_0^3 dr_0 }{ \int \frac{dF}{dr_0} r_0^3 dr_0}$',...
+    '$\gamma_2 = \frac{\int \left(\frac{r(\tau_{Hsu})}{r_0}\right)^3 \frac{dF}{dr_0} r_0^3 dr_0 }{ \int \frac{dF}{dr_0} r_0^3 dr_0}$',...
+    '$\gamma_3 = \frac{\int \frac{u(\tau_{Hsu})}{U_{10}} \frac{dF}{dr_0} r_0^3 dr_0 }{ \int \frac{dF}{dr_0} r_0^3 dr_0}$',...
     };
 
 MATLAB_colors = [...
@@ -68,9 +74,10 @@ for SSGF_ind = 1:nSSGF
     mu_Qk = zeros(nr0,nU10);
     sig_Qk = zeros(nr0,nU10);
     
-    R_cell = {RT,Ru,Rr,RbT,Rbu,Rbr};
+    R_cell = {RT,Rr,Ru,RbT,Rbr,Rbu,RHsuT,RHsur,RHsuu};
     count_plot = 1; % because R_ind is in the 'wrong' order for how I want to plot these
-    for R_ind = [1 3 2]
+    for R_ind = [1:9]
+        
         R = R_cell{R_ind};
         
         for U10_ind = 1:nU10
@@ -79,10 +86,19 @@ for SSGF_ind = 1:nSSGF
             mu(U10_ind) = mean(R_vec);
             sig(U10_ind) = std(R_vec);
         end
-        figure(1)
+        % select figure(1), figure(2), or figure(3)
+        if R_ind<=3
+            figure(1);
+        elseif R_ind>=7
+            figure(3);
+            if count_plot>3; count_plot = 1; end % Hack the counter
+        else
+            figure(2);
+            if count_plot>3; count_plot = 1; end % Hack the counter
+        end
         subplot(3,1,count_plot)
-        if R_ind == 2
-            line_h(SSGF_ind) = plot(U10_vec,mu,'-o',...
+        if ismember(R_ind,[3 6 9])
+            line_h(SSGF_ind,R_ind) = plot(U10_vec,mu,'-o',...
                 'color',colors(SSGF_ind,:),...
                 'displayname',SSGF_str_title,...
                 'linewidth',3);
@@ -95,9 +111,12 @@ for SSGF_ind = 1:nSSGF
         hold on
         ebh = errorbar(U10_vec,mu,sig);
         set(ebh,'linewidth',2,'color',colors(SSGF_ind,:))
-        ylh(count_plot) = ylabel(R_titles{R_ind},'interpreter','latex','fontsize',30,'rotation',0);
-        fprintf('\n%s %s\navg sig = %f\n',frac_var(R_ind),SSGF_str_title,mean(sig))
+        ylh(R_ind) = ylabel(R_titles{R_ind},'interpreter','latex','fontsize',30,'rotation',0);
+        fprintf('\n%s %s\navg sig = %f\n',frac_var(count_plot),SSGF_str_title,mean(sig))
         count_plot = count_plot + 1;
+        xlabel('$U_{10}$ [m/s]','interpreter','latex')
+        set(gcf,'position',[36  102 1257  688],'color','w')
+        set(gca,'fontsize',30)
     end
     
     if  strcmp(SSGF_str,'troit')
@@ -126,50 +145,51 @@ for SSGF_ind = 1:nSSGF
     xlabel('$U_{10}$ [m/s]','interpreter','latex')
     set(gcf,'position',[36  102 1257  688],'color','w')
     set(gca,'fontsize',30)
-    disp('debug')
 end
 
 plot_letter = 'abc';
-for i = 1:3
-    figure(1)
-    subplot(3,1,i)
-    set(gca,'fontsize',18,'ytick',[0.1 0.5 0.8 1],'yticklabel',{'10%','50%','80%','100%'})
-    plot(U10_vec,0.5*ones(nU10,1),'--','linewidth',2,'color',[1 1 1]*0.5)
-    plot(U10_vec,0.8*ones(nU10,1),':','linewidth',2,'color',[1 1 1]*0.5)
-    set(ylh(i),'fontsize',30)
-    if i == 3
-        xlabel('$U_{10}$ [m/s]','interpreter','latex')
-    else
-        xlabel('')
-        set(gca,'xtick',U10_vec,'XTickLabel',{})
+for j = 1:3
+    figure(j)
+    for i = 1:3
+        subplot(3,1,i)
+        set(gca,'fontsize',18,'ytick',[0.1 0.5 0.8 1],'yticklabel',{'10%','50%','80%','100%'})
+        plot(U10_vec,0.5*ones(nU10,1),'--','linewidth',2,'color',[1 1 1]*0.5)
+        plot(U10_vec,0.8*ones(nU10,1),':','linewidth',2,'color',[1 1 1]*0.5)
+        set(ylh(i+3*(j-1)),'fontsize',30)
+        if i == 3
+            xlabel('$U_{10}$ [m/s]','interpreter','latex')
+        else
+            xlabel('')
+            set(gca,'xtick',U10_vec,'XTickLabel',{})
+        end
+        %     txth = text(0.1,0.1,sprintf('(%s)',plot_letter(i)));
+        %     set(txth,'units','normalized','position',[0.95 0.05],'fontsize',20,'interpreter','latex')
+        drawnow
+        set(gcf,'position',[58 1 1001 802],'color','w')
     end
-    %     txth = text(0.1,0.1,sprintf('(%s)',plot_letter(i)));
-    %     set(txth,'units','normalized','position',[0.95 0.05],'fontsize',20,'interpreter','latex')
-    drawnow
-    set(gcf,'position',[58 1 1001 802],'color','w')
+    % add legend
+    % figure(2)
+    text_array_subplot = {'a)','b)','c)'};
+    t_sp_loc = [0.01,0.2;0.01,0.1;0.05,0.1];
+    for i = 1:3
+        h(i) = subplot(3,1,i);
+        t_sp(i) = text(t_sp_loc(i,1),t_sp_loc(i,2),text_array_subplot{i},'fontsize',30,'units','normalized','BackgroundColor', [1 1 1]);
+    end
+    lh = legend([line_h(3,3+3*(j-1)) line_h(2,3+3*(j-1)) line_h(1,3+3*(j-1))],'location','southeast','interpreter','latex');
+    % set(lh,'fontsize',20,'interpreter','latex','location','east');
+    
+    % addpath('/Users/ssroka/Documents/MATLAB/util/')
+    rearrange_figure(h,lh,'3x1_1_legend_3_yl',t_sp,ylh([1:3]+(3*(j-1))))
 end
-% add legend
-% figure(2)
-text_array_subplot = {'a)','b)','c)'};
-t_sp_loc = [0.01,0.2;0.01,0.1;0.05,0.1];
-for i = 1:3
-    h(i) = subplot(3,1,i);
-    t_sp(i) = text(t_sp_loc(i,1),t_sp_loc(i,2),text_array_subplot{i},'fontsize',30,'units','normalized','BackgroundColor', [1 1 1]);
-end
-lh = legend([line_h(3) line_h(2) line_h(1)],'location','southeast','interpreter','latex');
-% set(lh,'fontsize',20,'interpreter','latex','location','east');
-
-% addpath('/Users/ssroka/Documents/MATLAB/util/')
-rearrange_figure(h,lh,'3x1_1_legend_3_yl',t_sp,ylh)
 v = 'Tur';
 figure(1)
-update_figure_paper_size()
-print(sprintf('imgs/mass_flux_%s_%d_%d',v,Zhao_waveage_num,Troit_waveage_num),'-dpdf')
-savefig(sprintf('imgs/mass_flux_%s_%d_%d',v,Zhao_waveage_num,Troit_waveage_num))
+% update_figure_paper_size()
+% print(sprintf('imgs/mass_flux_%s_%d_%d',v,Zhao_waveage_num,Troit_waveage_num),'-dpdf')
+% savefig(sprintf('imgs/mass_flux_%s_%d_%d',v,Zhao_waveage_num,Troit_waveage_num))
 
-figure(4)
-update_figure_paper_size()
-print(sprintf('imgs/Qk_%d_%d',Zhao_waveage_num,Troit_waveage_num),'-dpdf')
+% figure(4)
+% update_figure_paper_size()
+% print(sprintf('imgs/Qk_%d_%d',Zhao_waveage_num,Troit_waveage_num),'-dpdf')
 
 % compare residence times
 %%

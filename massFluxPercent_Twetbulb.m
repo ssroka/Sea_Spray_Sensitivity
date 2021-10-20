@@ -65,6 +65,7 @@ SST_vec  = [27 28 29];  % [K]
 n_t_vec = 100; % time vector to interpolate the velocity of drop on to
 t_vec = logspace(-8,4,n_t_vec);
 
+g = 9.81; % ms^-2 gravity 
 
 % approximation flag
 % true => use the fitted equation
@@ -219,7 +220,6 @@ for SSGF_ind = 1:nSSGF
                                 case 'OS'
                                     dFdr_vec_mat(:,U10_ind) = calc_OS_SGF(U10,r0_vec); % meters
                                 case 'Zhao'
-                                    wp = 
                                     dFdr_vec_mat(:,U10_ind) = Zhao2006(r0_vec,U10,beta); % meters
                             end
                             t_b_mat(U10_ind) = fzero(@(t) U10*t*sin(pi/2)-0.5*9.81*t.^2,t0);
@@ -243,7 +243,9 @@ for SSGF_ind = 1:nSSGF
                             
                             if (tof_ind == 1) && (RH_ind == 1) && (DT_ind == 1) && (SST_ind == 1)
                                 [tof_mat(r0_ind,U10_ind),u_f] = compute_tauf(U10,SST_C,r0_m,m_s,s0,p0,T_a,maxEr_uf,maxIt); % meters
-                                Hs = 0.0087*(beta^1.86)*(U10^2)/9.8;% see Hsu et. al (2017)
+                                wp = g/(U10*beta); % from Zhao
+                                Tp = 2*pi/wp; % convert angular frequency to linear period
+                                Hs = 0.0087*((9.8*Tp/U10)^1.86)*(U10^2)/9.8;% see Hsu et. al (2017)
                                 tau_Hsu_mat(r0_ind,U10_ind) = 2*Hs/u_f; % meters
                                 Re =@(ud) (U10-ud).*(2.*r0_m)./nu_a;
                                 %                                 [~,uode] = ode45(@(t,ud) 3/8.*get_Cd(Re(ud)).*rho_a(T_a,p0)./rho_s(T_s,[],[],s0,p0).*(U10 - ud).^2./r0_m,t_vec,ud0,options) ;
